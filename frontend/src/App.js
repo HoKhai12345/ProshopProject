@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
+import HeaderNews from './components/HeaderNews'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
@@ -22,7 +23,8 @@ import OrderListScreen from './screens/OrderListScreen'
 const App = () => {
   return (
     <Router>
-      <Header />
+      {/* <Header /> */}
+      <HeaderNews />
       <main className='py-3'>
         <Container>
           <Route path='/order/:id' component={OrderScreen} />
