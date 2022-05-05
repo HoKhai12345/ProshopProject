@@ -6,14 +6,19 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
+import dbConnectMysql from './config/dbMysql.js'
+
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-
+import postRoutes from './routes/postRoutes.js'
+// import worker
+import newsRoutes from './routes/worker/newsRoutes.js'
 dotenv.config()
 console.log("dotenv.config()",dotenv.config());
-connectDB()
+connectDB();
+// dbConnectMysql()
 
 const app = express()
 
@@ -27,10 +32,14 @@ app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
-
+app.use('/api/posts' , postRoutes)
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
+// router cua worker
+app.use('/api/news' , newsRoutes);
+// router của MYSQL 
+// app.use('/postData/');
 
 const __dirname = path.resolve()
 console.log("path.resolve()",path.resolve());

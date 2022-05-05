@@ -10,6 +10,10 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
 } from './reducers/productReducers'
+import {
+  newsListReducer,
+  newsListRightReducer
+} from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
@@ -51,6 +55,9 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+  listNewsSocerSlide: newsListReducer,
+  listNewsSocerRight: newsListRightReducer
+   
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
