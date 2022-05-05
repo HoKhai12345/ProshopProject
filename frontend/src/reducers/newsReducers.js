@@ -62,6 +62,25 @@ export const newsListRightReducer = (state = { news: [] }, action) => {
   }
 }
 
+export const newsListTrafficReducer = (state = { news: [] }, action) => {
+  console.log("actionNEWSTraffic",action);
+  switch (action.type) {
+    case "TRAFFIC_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "TRAFFIC_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsTraffic: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "TRAFFIC_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 // export const productDetailsReducer = (
 //   state = { product: { reviews: [] } },
 //   action

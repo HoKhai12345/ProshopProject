@@ -129,6 +129,33 @@ export const listNewsSocerRight = (keyword = '', limit = '' , offset = '') => as
   }
 }
 
+// post bài viết giao thông 
+export const listNewsTraffic = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "TRAFFIC_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/26?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataTraffic",data);
+
+    dispatch({
+      type: "TRAFFIC_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "TRAFFIC_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
 
 
 

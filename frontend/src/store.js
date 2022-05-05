@@ -12,7 +12,8 @@ import {
 } from './reducers/productReducers'
 import {
   newsListReducer,
-  newsListRightReducer
+  newsListRightReducer,
+  newsListTrafficReducer
 } from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -56,7 +57,8 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
   listNewsSocerSlide: newsListReducer,
-  listNewsSocerRight: newsListRightReducer
+  listNewsSocerRight: newsListRightReducer,
+  listNewsTraffic: newsListTrafficReducer
    
 })
 
