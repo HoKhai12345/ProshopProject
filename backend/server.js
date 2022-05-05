@@ -14,11 +14,11 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 // import worker
-import sockerRoutes from './routes/worker/sockerRoutes.js'
+import newsRoutes from './routes/worker/newsRoutes.js'
 dotenv.config()
 console.log("dotenv.config()",dotenv.config());
 connectDB();
-dbConnectMysql()
+// dbConnectMysql()
 
 const app = express()
 
@@ -37,9 +37,9 @@ app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
 // router cua worker
-app.use('/worker/socker' , sockerRoutes);
+app.use('/api/news' , newsRoutes);
 // router của MYSQL 
-app.use('/postData/');
+// app.use('/postData/');
 
 const __dirname = path.resolve()
 console.log("path.resolve()",path.resolve());

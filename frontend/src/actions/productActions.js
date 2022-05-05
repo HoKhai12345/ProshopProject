@@ -23,6 +23,32 @@ import {
   PRODUCT_TOP_FAIL,
 } from '../constants/productConstants'
 
+
+import {
+  POST_LIST_REQUEST,
+  POST_LIST_SUCCESS,
+  POST_LIST_FAIL,
+  POST_DETAILS_REQUEST,
+  POST_DETAILS_SUCCESS,
+  POST_DETAILS_FAIL,
+  POST_DELETE_SUCCESS,
+  POST_DELETE_REQUEST,
+  POST_DELETE_FAIL,
+  POST_CREATE_REQUEST,
+  POST_CREATE_SUCCESS,
+  POST_CREATE_FAIL,
+  POST_UPDATE_REQUEST,
+  POST_UPDATE_SUCCESS,
+  POST_UPDATE_FAIL,
+  POST_CREATE_REVIEW_REQUEST,
+  POST_CREATE_REVIEW_SUCCESS,
+  POST_CREATE_REVIEW_FAIL,
+  POST_TOP_REQUEST,
+  POST_TOP_SUCCESS,
+  POST_TOP_FAIL,
+} from '../constants/newsConstants'
+
+
 export const listProducts = (keyword = '', pageNumber = '') => async (
   dispatch
 ) => {
@@ -48,6 +74,63 @@ export const listProducts = (keyword = '', pageNumber = '') => async (
     })
   }
 }
+
+// post bài viết bóng đá slide
+export const listNewsSocerSlide = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: POST_LIST_REQUEST })
+
+    const { data } = await axios.get(
+      `/api/news/36?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("data",data);
+
+    dispatch({
+      type: POST_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: POST_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết bóng đá bên phải 
+export const listNewsSocerRight = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "POST_LIST_REQUEST2" })
+
+    const { data } = await axios.get(
+      `/api/news/36?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("data",data);
+
+    dispatch({
+      type: "POST_LIST_SUCCESS2",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "POST_LIST_FAIL2",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+
+
 
 export const listProductDetails = (id) => async (dispatch) => {
   try {
