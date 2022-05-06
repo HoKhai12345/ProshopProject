@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Row } from "react-bootstrap";
 import Rating from "./Rating";
-import NewsRightSocker from "../components/NewsRightSocker";
+import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
 
@@ -13,9 +13,8 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const Traffic = ({ traffic }) => {
+const Fashion = ({ fashion }) => {
   const dispatch = useDispatch();
-  console.log("TRAFFIC", traffic);
   const settings = {
     dots: true,
     className: "slide2",
@@ -29,12 +28,12 @@ const Traffic = ({ traffic }) => {
     <>
       <div class="col-md-6">
         <h2>
-          Giao thông
+          Thời trang
         </h2>
         <div class="row cn-slider2">
           <Slider {...settings}>
-            {traffic &&
-              traffic.map((value) => {
+            {fashion &&
+              fashion.map((value) => {
                 return (
                   <div class="col-md-12" key={value.id}>
                     <div class="cn-img">
@@ -56,4 +55,4 @@ const Traffic = ({ traffic }) => {
   );
 };
 
-export default Traffic;
+export default Fashion;

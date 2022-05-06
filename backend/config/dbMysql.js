@@ -15,7 +15,6 @@ export const dbConnectMysql = (query)=>{
       dbConMysql.connect(function(error){
           if (error) {throw error}else{
                     console.log("Connect thành công______________________________________________________________________________");
-                    return dbConMysql;
                     //    dbConMysql.query(query , (err , res)=>{
                     //      if(err){
                     //          console.log("LỖI ĐÃ XẢY RA",err);

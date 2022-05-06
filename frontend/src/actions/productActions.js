@@ -137,7 +137,7 @@ export const listNewsTraffic = (keyword = '', limit = '' , offset = '') => async
     dispatch({ type: "TRAFFIC_LIST_REQUEST" })
 
     const { data } = await axios.get(
-      `/api/news/26?keyword=${keyword}&limit=${limit}&offset=${offset}`
+      `/api/news/37?keyword=${keyword}&limit=${limit}&offset=${offset}`
     )
     console.log("dataTraffic",data);
 
@@ -155,6 +155,169 @@ export const listNewsTraffic = (keyword = '', limit = '' , offset = '') => async
     })
   }
 }
+
+// post bài viết ngôi sao
+export const listNewsStar = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "STAR_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/39?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataSTAR",data);
+
+    dispatch({
+      type: "STAR_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "STAR_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết nấu ăn 
+export const listNewsCooking = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "COOKING_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/41?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataCOOKING",data);
+
+    dispatch({
+      type: "COOKING_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "COOKING_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết thời trang 
+export const listNewsFashion = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "FASHION_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/42?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataFashion",data);
+
+    dispatch({
+      type: "FASHION_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "FASHION_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết mạng xã hội
+export const listNewsSocialNetwork = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "SOCIAL_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/25?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataSocial",data);
+
+    dispatch({
+      type: "SOCIAL_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "SOCIAL_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết hài hước 
+export const listNewsFunny = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "FUNNY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/27?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataFunny",data);
+
+    dispatch({
+      type: "FUNNY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "FUNNY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+// post bài viết làm đẹp
+export const listNewsBeautify = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "BEAUTIFY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/40?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    console.log("dataBeautify",data);
+
+    dispatch({
+      type: "BEAUTIFY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "BEAUTIFY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+
 
 
 

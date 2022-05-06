@@ -28,7 +28,6 @@ const index = asyncHandler(async (req, res) => {
     "status": 1,
     "data":data})
  });
-//  console.log("data",data);
 
 })
 

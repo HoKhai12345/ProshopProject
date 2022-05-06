@@ -81,6 +81,112 @@ export const newsListTrafficReducer = (state = { news: [] }, action) => {
   }
 }
 
+export const newsListStarReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "STAR_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "STAR_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsStar: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "STAR_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListCookingReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "COOKING_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "COOKING_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsCooking: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "COOKING_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListFashionReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "FASHION_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "FASHION_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsFashion: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "FASHION_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListFunnyReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "FUNNY_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "FUNNY_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsFunny: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "FUNNY_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+// export const newsListFashionReducer = (state = { news: [] }, action) => {
+//   switch (action.type) {
+//     case "FASHION_LIST_REQUEST":
+//       return { loading: false, news: [] }
+//     case "FASHION_LIST_SUCCESS":
+//       return {
+//         loading: false,
+//         newsFashion: action.payload.data,
+//         pages: action.payload.pages,
+//         page: action.payload.page,
+//       }
+//     case "FASHION_LIST_FAIL":
+//       return { loading: false, error: action.payload }
+//     default:
+//       return state
+//   }
+// }
+// export const newsListFashionReducer = (state = { news: [] }, action) => {
+//   switch (action.type) {
+//     case "FASHION_LIST_REQUEST":
+//       return { loading: false, news: [] }
+//     case "FASHION_LIST_SUCCESS":
+//       return {
+//         loading: false,
+//         newsFashion: action.payload.data,
+//         pages: action.payload.pages,
+//         page: action.payload.page,
+//       }
+//     case "FASHION_LIST_FAIL":
+//       return { loading: false, error: action.payload }
+//     default:
+//       return state
+//   }
+// }
+
 // export const productDetailsReducer = (
 //   state = { product: { reviews: [] } },
 //   action
