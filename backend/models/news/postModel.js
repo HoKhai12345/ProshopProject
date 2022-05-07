@@ -17,7 +17,7 @@ const Post = (posts)=>{
             result(null , err);
 
         }else{
-             console.log("THÀNH CÔNG", res);
+             console.log("THÀNH CÔNG");
              result(null , res);
         }})
 }

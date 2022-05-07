@@ -1,4 +1,4 @@
-main {
+/* main {
   min-height: 80vh;
 }
 
@@ -21,7 +21,7 @@ h2 {
 }
 
 /* carousel */
-.carousel-item-next,
+/* .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active {
   display: flex;
@@ -43,4 +43,8 @@ h2 {
 }
 .carousel a {
   margin: 0 auto;
+} */
+
+.slide2  {
+  width: 100%;
 }

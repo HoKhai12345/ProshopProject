@@ -12,7 +12,11 @@ import {
 } from './reducers/productReducers'
 import {
   newsListReducer,
-  newsListRightReducer
+  newsListRightReducer,
+  newsListTrafficReducer,
+  newsListStarReducer,
+  newsListCookingReducer,
+  newsListFashionReducer
 } from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -56,7 +60,11 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
   listNewsSocerSlide: newsListReducer,
-  listNewsSocerRight: newsListRightReducer
+  listNewsSocerRight: newsListRightReducer,
+  listNewsTraffic: newsListTrafficReducer,
+  listNewsStar: newsListStarReducer,
+  listNewsCooking: newsListCookingReducer,
+  listNewsFashion: newsListFashionReducer
    
 })
 
