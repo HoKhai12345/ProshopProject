@@ -10,7 +10,6 @@ let trimString = function (string, length) {
            string;
   };
 const NewsRightSocker = ({ newsRight }) => {
-  console.log("newsRight", newsRight);
   return (
     <>
       {newsRight &&

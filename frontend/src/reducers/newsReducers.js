@@ -26,7 +26,6 @@ import {
 } from '../constants/newsConstants'
 
 export const newsListReducer = (state = { news: [] }, action) => {
-  console.log("actionNEWS",action);
   switch (action.type) {
     case POST_LIST_REQUEST:
       return { loading: false, news: [] }
@@ -44,7 +43,6 @@ export const newsListReducer = (state = { news: [] }, action) => {
   }
 }
 export const newsListRightReducer = (state = { news: [] }, action) => {
-  console.log("actionNEWS",action);
   switch (action.type) {
     case "POST_LIST_REQUEST2":
       return { loading: false, news: [] }
@@ -63,7 +61,6 @@ export const newsListRightReducer = (state = { news: [] }, action) => {
 }
 
 export const newsListTrafficReducer = (state = { news: [] }, action) => {
-  console.log("actionNEWSTraffic",action);
   switch (action.type) {
     case "TRAFFIC_LIST_REQUEST":
       return { loading: false, news: [] }
@@ -147,6 +144,95 @@ export const newsListFunnyReducer = (state = { news: [] }, action) => {
         page: action.payload.page,
       }
     case "FUNNY_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListSocialReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "SOCIAL_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "SOCIAL_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsSocial: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "SOCIAL_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+export const newsListBeautifyReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "BEAUTIFY_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "BEAUTIFY_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsBeautify: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "BEAUTIFY_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListFamilyReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "FAMILY_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "FAMILY_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsFamily: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "FAMILY_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListTravelReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "TRAVEL_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "TRAVEL_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsTravel: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "TRAVEL_LIST_FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const newsListEconomyReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "ECONOMY_LIST_REQUEST":
+      return { loading: false, news: [] }
+    case "ECONOMY_LIST_SUCCESS":
+      return {
+        loading: false,
+        newsEconomy: action.payload.data,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      }
+    case "ECONOMY_LIST_FAIL":
       return { loading: false, error: action.payload }
     default:
       return state

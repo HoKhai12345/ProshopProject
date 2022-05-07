@@ -317,6 +317,81 @@ export const listNewsBeautify = (keyword = '', limit = '' , offset = '') => asyn
   }
 }
 
+// post bài viết gia đình
+export const listNewsFamily = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "FAMILY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/140?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "FAMILY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "FAMILY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết du lịch
+export const listNewsTravel = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "TRAVELS_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/141?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "TRAVELS_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "TRAVELS_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết Kinh tế 
+export const listNewsEconomy = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "ECONOMY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/44?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "ECONOMY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "ECONOMY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
 
 
 

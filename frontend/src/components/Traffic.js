@@ -15,7 +15,6 @@ let trimString = function (string, length) {
 
 const Traffic = ({ traffic }) => {
   const dispatch = useDispatch();
-  console.log("TRAFFIC", traffic);
   const settings = {
     dots: true,
     className: "slide2",
