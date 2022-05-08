@@ -325,7 +325,7 @@ export const listNewsFamily = (keyword = '', limit = '' , offset = '') => async 
     dispatch({ type: "FAMILY_LIST_REQUEST" })
 
     const { data } = await axios.get(
-      `/api/news/140?keyword=${keyword}&limit=${limit}&offset=${offset}`
+      `/api/news/29?keyword=${keyword}&limit=${limit}&offset=${offset}`
     )
     dispatch({
       type: "FAMILY_LIST_SUCCESS",
@@ -350,7 +350,7 @@ export const listNewsTravel = (keyword = '', limit = '' , offset = '') => async 
     dispatch({ type: "TRAVELS_LIST_REQUEST" })
 
     const { data } = await axios.get(
-      `/api/news/141?keyword=${keyword}&limit=${limit}&offset=${offset}`
+      `/api/news/178?keyword=${keyword}&limit=${limit}&offset=${offset}`
     )
     dispatch({
       type: "TRAVELS_LIST_SUCCESS",
@@ -391,6 +391,16 @@ export const listNewsEconomy = (keyword = '', limit = '' , offset = '') => async
     })
   }
 }
+
+
+// lấy bài viết nhiều view 
+export const listNewsViews = async (keyword = '', limit = '' , offset = '' , result)=>{
+  const { data } = await axios.get(
+    `/api/news/43?keyword=${keyword}&limit=${limit}&offset=${offset}`
+  )
+ return result(null , data)
+}
+
 
 
 

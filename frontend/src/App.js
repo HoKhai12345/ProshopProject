@@ -19,6 +19,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import NewsDetailScreen from './screens/NewsDetailScreen'
 // import "~slick-carousel/slick/slick.css"; 
 // import "~slick-carousel/slick/slick-theme.css";
 const App = () => {
@@ -28,6 +29,8 @@ const App = () => {
       <HeaderNews />
       <main className='py-3'>
         <Container>
+        <Route path='/:title/:id' component={NewsDetailScreen} />
+
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
@@ -59,6 +62,7 @@ const App = () => {
             exact
           />
           <Route path='/' component={HomeScreen} exact />
+
         </Container>
       </main>
       <Footer />

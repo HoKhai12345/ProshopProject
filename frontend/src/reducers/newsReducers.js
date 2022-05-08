@@ -205,16 +205,16 @@ export const newsListFamilyReducer = (state = { news: [] }, action) => {
 
 export const newsListTravelReducer = (state = { news: [] }, action) => {
   switch (action.type) {
-    case "TRAVEL_LIST_REQUEST":
+    case "TRAVELS_LIST_REQUEST":
       return { loading: false, news: [] }
-    case "TRAVEL_LIST_SUCCESS":
+    case "TRAVELS_LIST_SUCCESS":
       return {
         loading: false,
         newsTravel: action.payload.data,
         pages: action.payload.pages,
         page: action.payload.page,
       }
-    case "TRAVEL_LIST_FAIL":
+    case "TRAVELS_LIST_FAIL":
       return { loading: false, error: action.payload }
     default:
       return state

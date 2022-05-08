@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
@@ -10,6 +10,7 @@ import Cooking from "../components/Cooking";
 import Fashion from "../components/Fashion";
 import LeftManyPage from "../components/LeftManyPage"
 import RightManyPage from "../components/RightManyPage";
+import StrangeNews from "../components/StrangeNews";
 import NewsRightSocker from "../components/NewsRightSocker";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -32,8 +33,12 @@ import { listNewsFashion } from "../actions/productActions";
 import { listNewsTravel } from "../actions/productActions";
 import { listNewsFamily } from "../actions/productActions";
 import { listNewsEconomy } from "../actions/productActions";
+import { listNewsViews } from "../actions/productActions"
 
 const HomeScreen = ({ match }) => {
+  // Khai báo state
+  const [listNewsStrange , setListNewsStrange] = useState([])
+  const [listNewsReadMore , setListNewsReadMore] = useState([])
   const keyword = match.params.keyword;
 
   const pageNumber = match.params.pageNumber || 1;
@@ -72,7 +77,16 @@ const HomeScreen = ({ match }) => {
   const newsEconomyPage = useSelector((state)=> state.listNewsEconomy)
     // lấy dữ liệu du lịch từ store
     const newsTravelPage = useSelector((state)=> state.listNewsTravel)
-  
+  //lấy dữ liệu nhiều view
+
+  useEffect(()=>{
+     listNewsViews("",9,0, (err , data)=>{
+      setListNewsStrange(data.data)
+    });    
+    listNewsViews("",6 , 9,(err ,data)=>{
+      setListNewsReadMore(data.data)
+    })
+  },[])
 
   const { newsStar } = newsStarPage;
   const { news } = newsSocerListSlide;
@@ -175,6 +189,7 @@ const HomeScreen = ({ match }) => {
                 </div>
             </div>
         </div>
+        <StrangeNews strange={listNewsStrange} readMore={listNewsReadMore} ></StrangeNews>
       </>
     </>
   );

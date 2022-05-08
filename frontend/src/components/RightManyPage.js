@@ -26,12 +26,12 @@ const RightManyPage = ({ economy, family, travel }) => {
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#family">
-              Gia đình
+            Fitness
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#travel">
-              Du lịch
+              Thời tiết
             </a>
           </li>
         </ul>
