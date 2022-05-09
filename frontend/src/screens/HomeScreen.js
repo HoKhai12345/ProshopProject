@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
@@ -10,6 +10,7 @@ import Cooking from "../components/Cooking";
 import Fashion from "../components/Fashion";
 import LeftManyPage from "../components/LeftManyPage"
 import RightManyPage from "../components/RightManyPage";
+import StrangeNews from "../components/StrangeNews";
 import NewsRightSocker from "../components/NewsRightSocker";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -22,12 +23,22 @@ import { listNewsSocerSlide } from "../actions/productActions";
 import { listNewsSocerRight } from "../actions/productActions";
 import { listNewsTraffic } from "../actions/productActions";
 import { listNewsStar } from "../actions/productActions";
+import { listNewsFunny } from "../actions/productActions";
+import { listNewsSocialNetwork } from "../actions/productActions";
+import { listNewsBeautify } from "../actions/productActions";
 
 import { listNewsCooking } from "../actions/productActions";
 
 import { listNewsFashion } from "../actions/productActions";
+import { listNewsTravel } from "../actions/productActions";
+import { listNewsFamily } from "../actions/productActions";
+import { listNewsEconomy } from "../actions/productActions";
+import { listNewsViews } from "../actions/productActions"
 
 const HomeScreen = ({ match }) => {
+  // Khai báo state
+  const [listNewsStrange , setListNewsStrange] = useState([])
+  const [listNewsReadMore , setListNewsReadMore] = useState([])
   const keyword = match.params.keyword;
 
   const pageNumber = match.params.pageNumber || 1;
@@ -37,6 +48,8 @@ const HomeScreen = ({ match }) => {
   const offset = match.params.offset || 0;
 
   const dispatch = useDispatch();
+
+  // code trang home ko cần thiết dùng redux nhưng kệ vẫn dùng , code 1 vài component lặp nhưng chưa có thời gian sửa
 
   // Lấy dữ liệu từ product list từ store
   const productList = useSelector((state) => state.productList);
@@ -52,32 +65,86 @@ const HomeScreen = ({ match }) => {
   const newsCookingPage = useSelector((state) => state.listNewsCooking)
   // Lấy dữ liệu thời trang từ store 
   const newsFashionPage = useSelector((state)=> state.listNewsFashion)
+  // Lấy dữ liệu hài hước từ store
+  const newsFunnyPage = useSelector((state)=> state.listNewsFunny)
+  // Lấy dữ liệu mạng xã hội từ store 
+  const newsSocialPage = useSelector((state)=> state.listNewsSocial)
+  // lấy dữ liệu làm đẹp từ store
+  const newsBeautifyPage = useSelector((state)=> state.listNewsBeautify)
+    // lấy dữ liệu gia đình từ store
+    const newsFamilyPage = useSelector((state)=> state.listNewsFamily)
+      // lấy dữ liệu kinh tế  từ store
+  const newsEconomyPage = useSelector((state)=> state.listNewsEconomy)
+    // lấy dữ liệu du lịch từ store
+    const newsTravelPage = useSelector((state)=> state.listNewsTravel)
+  //lấy dữ liệu nhiều view
+
+  useEffect(()=>{
+     listNewsViews("",9,0, (err , data)=>{
+      setListNewsStrange(data.data)
+    });    
+    listNewsViews("",6 , 9,(err ,data)=>{
+      setListNewsReadMore(data.data)
+    })
+  },[])
+
   const { newsStar } = newsStarPage;
   const { news } = newsSocerListSlide;
   const { newsTraffic } = newsTrafficPage;
   const { newsCooking } = newsCookingPage;
   const { newsFashion } = newsFashionPage;
+  const { newsFunny }   = newsFunnyPage;
+  const { newsSocial }  = newsSocialPage;
+  const { newsBeautify } = newsBeautifyPage;
+  const { newsFamily }   = newsFamilyPage;
+  const { newsTravel }  = newsTravelPage;
+  const { newsEconomy } = newsEconomyPage
 
   // dispath giá trị cho bản tin bóng đá slide
   useEffect(() => {
     dispatch(listNewsSocerSlide(keyword, 1, 0));
   }, [dispatch, keyword, limit, offset]);
-  // Lấy giá trị cho bản tin giao thông
+  // dispatch giá trị cho bản tin giao thông
   useEffect(() => {
     dispatch(listNewsTraffic(keyword, 4, 0));
   }, [dispatch, keyword]);
-  // lấy giá trị cho bản tin star
+  // dispatch giá trị cho bản tin star
   useEffect(() => {
     dispatch(listNewsStar(keyword, 4, 0));
   }, [dispatch, keyword, limit, offset]);
-  // lấy giá trị cho bản tin nấu ăn
+  // dispatch giá trị cho bản tin nấu ăn
   useEffect(() => {
     dispatch(listNewsCooking(keyword, 4, 0));
   }, [dispatch, keyword, limit, offset]);
-  //lấy giá trị cho bản tin thời trang
+  //dispatch giá trị cho bản tin thời trang
   useEffect(() => {
     dispatch(listNewsFashion(keyword, 4, 0));
   }, [dispatch, keyword, limit, offset]);
+    //dispatch giá trị cho bản tin hài hước
+    useEffect(() => {
+      dispatch(listNewsFunny("", 3, 0));
+    }, [dispatch, keyword, limit, offset]);
+      //dispatch giá trị cho bản tin mạng xã hội
+  useEffect(() => {
+    dispatch(listNewsSocialNetwork("", 3, 0));
+  }, [dispatch, limit, offset]);
+    //dispatch giá trị cho bản tin làm đẹp
+    useEffect(() => {
+      dispatch(listNewsBeautify("", 3, 0));
+    }, [dispatch, limit, offset]);
+
+      //dispatch giá trị cho bản tin gia đình 
+      useEffect(() => {
+        dispatch(listNewsFamily("", 3, 0));
+      }, [dispatch]);
+        //dispatch giá trị cho bản tin du lịch
+    useEffect(() => {
+      dispatch(listNewsTravel("", 3, 0));
+    }, [dispatch]);
+      //dispatch giá trị cho bản tin kinh tế 
+      useEffect(() => {
+        dispatch(listNewsEconomy("", 3, 0));
+      }, [dispatch]);
   return (
     <>
       {/* <Meta />
@@ -117,11 +184,12 @@ const HomeScreen = ({ match }) => {
         <div class="tab-news">
             <div class="container">
                 <div class="row">
-                    <LeftManyPage></LeftManyPage>
-                    <RightManyPage></RightManyPage>
+                    <LeftManyPage funny={newsFunny} social={newsSocial} beautify={newsBeautify}></LeftManyPage>
+                    <RightManyPage economy={newsEconomy} family={newsFamily} travel={newsTravel}></RightManyPage>
                 </div>
             </div>
         </div>
+        <StrangeNews strange={listNewsStrange} readMore={listNewsReadMore} ></StrangeNews>
       </>
     </>
   );

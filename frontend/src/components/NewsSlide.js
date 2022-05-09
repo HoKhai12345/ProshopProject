@@ -15,7 +15,6 @@ const NewsSlide = ({ news }) => {
   useEffect(() => {
     dispatch(listNewsSocerRight(" ", 4, 1));
   }, [dispatch]);
-  console.log("listNewsSocerRight", listSocerRight);
   const { newsSockerRight } = listSocerRight;
 
   return (

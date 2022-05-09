@@ -16,7 +16,13 @@ import {
   newsListTrafficReducer,
   newsListStarReducer,
   newsListCookingReducer,
-  newsListFashionReducer
+  newsListFashionReducer,
+  newsListFunnyReducer,
+  newsListSocialReducer,
+  newsListBeautifyReducer,
+  newsListEconomyReducer,
+  newsListFamilyReducer,
+  newsListTravelReducer
 } from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -36,6 +42,7 @@ import {
   orderListMyReducer,
   orderListReducer,
 } from './reducers/orderReducers'
+import { listNewsEconomy, listNewsFamily, listNewsTravel } from './actions/productActions'
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -64,7 +71,13 @@ const reducer = combineReducers({
   listNewsTraffic: newsListTrafficReducer,
   listNewsStar: newsListStarReducer,
   listNewsCooking: newsListCookingReducer,
-  listNewsFashion: newsListFashionReducer
+  listNewsFashion: newsListFashionReducer,
+  listNewsFunny: newsListFunnyReducer,
+  listNewsSocial: newsListSocialReducer,
+  listNewsBeautify: newsListBeautifyReducer,
+  listNewsFamily: newsListFamilyReducer,
+  listNewsTravel: newsListTravelReducer,
+  listNewsEconomy: newsListEconomyReducer
    
 })
 

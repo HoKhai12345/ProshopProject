@@ -317,6 +317,91 @@ export const listNewsBeautify = (keyword = '', limit = '' , offset = '') => asyn
   }
 }
 
+// post bài viết gia đình
+export const listNewsFamily = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "FAMILY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/29?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "FAMILY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "FAMILY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết du lịch
+export const listNewsTravel = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "TRAVELS_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/178?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "TRAVELS_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "TRAVELS_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// post bài viết Kinh tế 
+export const listNewsEconomy = (keyword = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "ECONOMY_LIST_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/44?keyword=${keyword}&limit=${limit}&offset=${offset}`
+    )
+    dispatch({
+      type: "ECONOMY_LIST_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "ECONOMY_LIST_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+
+// lấy bài viết nhiều view 
+export const listNewsViews = async (keyword = '', limit = '' , offset = '' , result)=>{
+  const { data } = await axios.get(
+    `/api/news/43?keyword=${keyword}&limit=${limit}&offset=${offset}`
+  )
+ return result(null , data)
+}
+
+
 
 
 
