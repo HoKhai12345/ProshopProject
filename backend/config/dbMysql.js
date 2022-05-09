@@ -1,36 +1,13 @@
+import mysql from "mysql2";
 
-import mysql from 'mysql';
-
-
-
-
-export const dbConnectMysql = (query)=>{
-   const dbConMysql =  mysql.createConnection({
-        host: "mariadb",
-        user: "root",
-        password: "hungna",
-        database: "db_daitamphat"
-      });
-     
-      dbConMysql.connect(function(error){
-          if (error) {throw error}else{
-                    console.log("Connect thành công______________________________________________________________________________");
-                    //    dbConMysql.query(query , (err , res)=>{
-                    //      if(err){
-                    //          console.log("LỖI ĐÃ XẢY RA",err);
-                    //      }else{
-                    //           console.log("THÀNH CÔNG", res);
-                    //          return res
-                    //      }
-                    //  })
-                    
-          }
-               // console.log("Connect thành công______________________________________________________________________________");
+const dbConMysql = mysql.createConnection({
+  host: "mariadb",
+  user: "root",
+  password: "hungna",
+  database: "db_daitamphat",
 });
-     return dbConMysql;
-}
-export default dbConnectMysql
 
+export default dbConMysql;
 
 // var mysql = require('mysql');
 
@@ -40,7 +17,7 @@ export default dbConnectMysql
 //             password: "hungna",
 //             database: "db_daitamphat"
 //           });
-         
+
 //  dbConn.connect(function(error){
 //  	if (error) throw error
 //  		console.log("Connect thành công");
