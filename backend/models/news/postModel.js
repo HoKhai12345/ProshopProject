@@ -44,4 +44,30 @@ Post.getListData = async (
     );
   return rows;
 };
+
+Post.getDataByUuId = async (
+  slug,
+  result
+) => {
+  // console.log('dbConnectMysql', dbConnectMysql().query())
+  //   console.log(
+  //     "SELECT * FROM data_news_version_2_posts where categoryId =" +
+  //       categoryId +
+  //       " and title LIKE  '%" +
+  //       keyword +
+  //       "%'" +
+  //       " ORDER BY id DESC" +
+  //       " limit " +
+  //       offset +
+  //       "," +
+  //       limit
+  //   );
+  console.log(      "SELECT * FROM data_news_version_2_posts where slugs = '" + slug + "'");
+  const [rows, fields] = await dbConnectMysql
+    .promise()
+    .query(
+      "SELECT * FROM data_news_version_2_posts where slugs = '" + slug + "'"
+    );
+  return rows;
+};
 export default Post;
