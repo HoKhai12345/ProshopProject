@@ -1,9 +1,6 @@
 
 import mysql from 'mysql';
 
-
-
-
 const Connection = async ()=>{
    const dbConMysql = await  mysql.createConnection({
         host: "mariadb",
