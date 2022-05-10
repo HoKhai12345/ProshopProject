@@ -35,7 +35,7 @@ const NewsDetailScreen = ({ history, match }) => {
   useEffect(()=>{
     newsBySlugs(slug, (err , data)=>{
       console.log("DATA",data);
-      if(data.data){
+      if(data.data.length >0){
         setNewsDetail(data.data[0]);
         setNewCategoryId(data.data[0].categoryId);
         console.log("data.data[0].categoryId",data.data[0].categoryId);
@@ -47,6 +47,7 @@ const NewsDetailScreen = ({ history, match }) => {
             }
         })
       }else{
+        console.log("KO CO DATA");
         history.push('/');
 
       }
@@ -137,7 +138,7 @@ const NewsDetailScreen = ({ history, match }) => {
             <div class="col-lg-8">
               <div class="sn-container">
                 <div class="sn-img">
-                  {console.log("newsDetail",typeof newsDetail.photo_data)}
+                  {console.log("newsDetail", newsDetail)}
                   {/* {console.log("JSON.stringify(newsDetail.photo_data)",JSON.parse(newsDetail.photo_data).big_690x450)} */}
                   <img src={"http://evideo.vn/cms/" + newsDetail.thumb} />
                 </div>

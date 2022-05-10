@@ -35,7 +35,7 @@ const Strange = ({ strange , readMore }) => {
                                         <div class="mn-img">
                                             <img src={"http://evideo.vn/cms/" + value.thumb} />
                                             <div class="mn-title">
-                                                <a href="">{trimString(value.title, 30)}</a>
+                                                <a href={"/"+value.slugs}>{trimString(value.title, 30)}</a>
                                             </div>
                                         </div>
                                     </div>

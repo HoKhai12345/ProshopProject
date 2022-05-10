@@ -19,7 +19,7 @@ const NewsRightSocker = ({ newsRight }) => {
               <div class="tn-img">
                 <img src={"http://evideo.vn/cms/"+newsRight.thumb} />
                 <div class="tn-title">
-                  <a style={{fontSize:15}} href="">{trimString(newsRight.title, 40)}</a>
+                  <a style={{fontSize:15}} href={"/"+newsRight.slugs}>{trimString(newsRight.title, 40)}</a>
                 </div>
               </div>
             </div>

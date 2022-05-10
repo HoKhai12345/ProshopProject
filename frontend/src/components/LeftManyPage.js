@@ -45,7 +45,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href="">{trimString(value.title,40)}</a>
+                    <a href={"/"+value.slugs}>{trimString(value.title,40)}</a>
                   </div>
                 </div>
               ))}
@@ -58,7 +58,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href="">{trimString(value.title , 40)}</a>
+                    <a href={"/"+value.slugs}>{trimString(value.title , 40)}</a>
                   </div>
                 </div>
               ))}
@@ -71,7 +71,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href="">{trimString(value.title , 40)}</a>
+                    <a href={"/"+value.slugs}>{trimString(value.title , 40)}</a>
                   </div>
                 </div>
               ))}
