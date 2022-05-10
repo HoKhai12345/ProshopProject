@@ -401,6 +401,15 @@ export const listNewsViews = async (keyword = '', limit = '' , offset = '' , res
  return result(null , data)
 }
 
+// lấy bài viết chi tiết qua slugs 
+export const newsBySlugs = async (slugs, result)=>{
+  console.log("SLUGS",slugs);
+  const { data } = await axios.get(
+    `/api/news/newsDetail?slug=${slugs}`
+  )
+ return result(null , data)
+}
+
 
 
 

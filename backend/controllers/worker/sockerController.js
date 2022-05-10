@@ -27,10 +27,30 @@ const index = asyncHandler(async (req, res) => {
   });
 });
 
+
+const newsDetail = asyncHandler(async (req, res) => {
+  const slug = req.query.slug;
+  console.log("slug",slug);
+
+  if (!slug) {
+    res.json({ err: 1, msg: "thiếu tham số " });
+  }
+  // const limit = req.query.limit ? req.query.limit : 10;
+  // const offset = req.query.offset ? req.query.offset : 0;
+  // const keyword = req.query.keyword ? req.query.keyword : "";
+  const data = await postModel.getDataByUuId(slug);
+
+  res.json({
+    err: 0,
+    status: 1,
+    data: data,
+  });
+});
+
 const notApi = asyncHandler(async (req, res) => {
   res.status(201).json({
     err: 1,
     msg: "Invalid params",
   });
 });
-export { index, notApi };
+export { index, notApi , newsDetail };

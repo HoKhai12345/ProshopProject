@@ -29,7 +29,6 @@ const App = () => {
       <HeaderNews />
       <main className='py-3'>
         <Container>
-        <Route path='/:title/:id' component={NewsDetailScreen} />
 
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
@@ -61,6 +60,7 @@ const App = () => {
             component={HomeScreen}
             exact
           />
+          <Route path='/:slugNews' component={NewsDetailScreen} />
           <Route path='/' component={HomeScreen} exact />
 
         </Container>
