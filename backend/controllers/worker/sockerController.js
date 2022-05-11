@@ -28,6 +28,20 @@ const index = asyncHandler(async (req, res) => {
 });
 
 
+const countPostCate = asyncHandler(async (req, res) => {
+  const data = await postModel.getCountPostCate();
+  res.json({
+    err: 0,
+    status: 1,
+    data: data,
+  });
+});
+
+
+
+
+
+
 const newsDetail = asyncHandler(async (req, res) => {
   const slug = req.query.slug;
   console.log("slug",slug);
@@ -39,11 +53,16 @@ const newsDetail = asyncHandler(async (req, res) => {
   // const offset = req.query.offset ? req.query.offset : 0;
   // const keyword = req.query.keyword ? req.query.keyword : "";
   const data = await postModel.getDataByUuId(slug);
+  const dataRelated = await postModel.getDataRelaredByslug(slug,data[0].categoryId);
+  const dataInThisCategory = await postModel.getDataInThisCateByslug(slug,data[0].categoryId);
 
+  
   res.json({
     err: 0,
     status: 1,
     data: data,
+    dataRelated:dataRelated,
+    dataInThisCategory:dataInThisCategory
   });
 });
 
@@ -53,4 +72,4 @@ const notApi = asyncHandler(async (req, res) => {
     msg: "Invalid params",
   });
 });
-export { index, notApi , newsDetail };
+export { index, notApi , newsDetail ,countPostCate};

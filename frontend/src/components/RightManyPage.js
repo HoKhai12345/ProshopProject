@@ -14,10 +14,11 @@ let trimString = function (string, length) {
 };
 
 const RightManyPage = ({ economy, family, travel }) => {
+  console.log("economy",economy);
   const dispatch = useDispatch();
   return (
     <>
-      <div class="col-md-6">
+      {/* <div class="col-md-6"> */}
         <ul class="nav nav-pills nav-justified">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="pill" href="#economy">
@@ -45,8 +46,9 @@ const RightManyPage = ({ economy, family, travel }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href={"/"+value.slugs}>{trimString(value.title,40)}</a>
-                  </div>
+                  <Link to={"/"+value.slugs+".html"}>
+                        <a>{trimString(value.title, 40)}</a>
+                        </Link>                  </div>
                 </div>
               ))}
           </div>
@@ -58,8 +60,9 @@ const RightManyPage = ({ economy, family, travel }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href="">{trimString(value.title , 40)}</a>
-                  </div>
+                  <Link to={"/"+value.slugs+".html"}>
+                        <a>{trimString(value.title, 40)}</a>
+                        </Link>                  </div>
                 </div>
               ))}
           </div>
@@ -71,13 +74,14 @@ const RightManyPage = ({ economy, family, travel }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href="">{trimString(value.title , 40)}</a>
-                  </div>
+                  <Link to={"/"+value.slugs+".html"}>
+                        <a>{trimString(value.title, 40)}</a>
+                        </Link>                  </div>
                 </div>
               ))}
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

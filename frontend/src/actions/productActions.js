@@ -411,6 +411,31 @@ export const newsBySlugs = async (slugs, result)=>{
 }
 
 
+// lấy tổng số bản ghi của từng chuyên mục 
+export const countCatePost = () => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "COUNT_POSTCATE_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/countPostCate`
+    )
+    dispatch({
+      type: "COUNT_POSTCATE_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "COUNT_POSTCATE__FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
 
 
 

@@ -3,14 +3,16 @@ const router = express.Router()
 import {
   index,
   notApi,
-  newsDetail
+  newsDetail,
+  countPostCate
 } from '../../controllers/worker/sockerController.js'
 import { protect, admin } from '../../middleware/authMiddleware.js'
 
 // router.route('/').get(getPosts).post(protect, admin, createPost)
-router.route('/').get(notApi)
+router.route('/').get(notApi);
+router.route('/countPostCate').get(countPostCate);
 router.route('/newsDetail').get(newsDetail);
-router.route('/:categoryId').get(index)
+router.route('/:categoryId').get(index);
 
 
 

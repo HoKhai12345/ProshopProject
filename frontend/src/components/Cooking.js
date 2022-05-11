@@ -42,7 +42,9 @@ const Cooking = ({ cooking }) => {
                         src={"http://evideo.vn/cms/" + value.thumb}
                       />
                       <div class="cn-title">
-                        <a href="">{trimString(value.title, 40)}</a>
+                      <Link to={"/"+value.slugs+".html"}>
+                        <a>{trimString(value.title, 40)}</a>
+                        </Link>
                       </div>
                     </div>
                   </div>
