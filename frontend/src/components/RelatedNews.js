@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Row } from "react-bootstrap";
 import Rating from "./Rating";
-import NewsRightSocker from "../components/NewsRightSocker";
+import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
 
@@ -13,27 +13,30 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const Traffic = ({ traffic }) => {
+const RelatedNews = ({ related , title}) => {
+    console.log("related",related);
   const dispatch = useDispatch();
   const settings = {
     dots: true,
     className: "slide2",
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     ltr: false
   };
   return (
     <>
-      <div class="col-md-6">
+            <div class="cat-news">
+
+      <div class="col-md-12">
         <h2>
-          Giao thông
+        {title}
         </h2>
-        <div class="row cn-slider2">
+        {/* <div class="row cn-slider2"> */}
           <Slider {...settings}>
-            {traffic &&
-              traffic.map((value) => {
+            {related && related != {} &&
+              related.map((value) => {
                 return (
                   <div class="col-md-12" key={value.id}>
                     <div class="cn-img">
@@ -42,7 +45,7 @@ const Traffic = ({ traffic }) => {
                         src={"http://evideo.vn/cms/" + value.thumb}
                       />
                       <div class="cn-title">
-                      <Link to={"/"+value.slugs+".html"}>
+                      <Link to={"/"+value.slugs+".html"+".html"}>
                         <a>{trimString(value.title, 40)}</a>
                         </Link>
                       </div>
@@ -51,10 +54,11 @@ const Traffic = ({ traffic }) => {
                 );
               })}
           </Slider>
-        </div>
-      </div>
+{/* </div> */}
+</div>
+</div>
     </>
   );
 };
 
-export default Traffic;
+export default RelatedNews;

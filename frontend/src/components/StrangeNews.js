@@ -35,7 +35,9 @@ const Strange = ({ strange , readMore }) => {
                                         <div class="mn-img">
                                             <img src={"http://evideo.vn/cms/" + value.thumb} />
                                             <div class="mn-title">
-                                                <a href={"/"+value.slugs}>{trimString(value.title, 30)}</a>
+                                            <Link to={"/" + value.slugs}>
+                                    <a>{trimString(value.title, 40)}</a>
+                                  </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -46,10 +48,12 @@ const Strange = ({ strange , readMore }) => {
 
                         <div class="col-lg-3">
                             <div class="mn-list">
-                                <h2>Read More</h2>
+                                <h2>Xu hướng</h2>
                                 <ul>
                                     {readMore && readMore.map((value)=>(
-                                    <li><a href="">{trimString(value.title,40)}</a></li>
+                                    <li> <Link to={"/" + value.slugs}>
+                                    <a>{trimString(value.title, 40)}</a>
+                                  </Link>{" "}</li>
                                     ))}
                                 </ul>
                             </div>

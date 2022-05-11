@@ -9,6 +9,7 @@ import {
   productUpdateReducer,
   productReviewCreateReducer,
   productTopRatedReducer,
+
 } from './reducers/productReducers'
 import {
   newsListReducer,
@@ -22,7 +23,8 @@ import {
   newsListBeautifyReducer,
   newsListEconomyReducer,
   newsListFamilyReducer,
-  newsListTravelReducer
+  newsListTravelReducer,
+  countPostCate
 } from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -77,7 +79,8 @@ const reducer = combineReducers({
   listNewsBeautify: newsListBeautifyReducer,
   listNewsFamily: newsListFamilyReducer,
   listNewsTravel: newsListTravelReducer,
-  listNewsEconomy: newsListEconomyReducer
+  listNewsEconomy: newsListEconomyReducer,
+  countNewsPostCate:countPostCate
    
 })
 

@@ -238,6 +238,24 @@ export const newsListEconomyReducer = (state = { news: [] }, action) => {
       return state
   }
 }
+
+export const countPostCate = (state = { count: [] }, action) => {
+  switch (action.type) {
+    case "COUNT_POSTCATE_REQUEST":
+      return { loading: false, count: [] }
+    case "COUNT_POSTCATE_SUCCESS":
+      return {
+        loading: false,
+        count: action.payload.data,
+      }
+    case "COUNT_POSTCATE__FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+
 // export const newsListFashionReducer = (state = { news: [] }, action) => {
 //   switch (action.type) {
 //     case "FASHION_LIST_REQUEST":

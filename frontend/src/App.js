@@ -60,7 +60,7 @@ const App = () => {
             component={HomeScreen}
             exact
           />
-          <Route path='/:slugNews' component={NewsDetailScreen} />
+          <Route path={'/:slugNews'+'.html'} component={NewsDetailScreen} />
           <Route path='/' component={HomeScreen} exact />
 
         </Container>

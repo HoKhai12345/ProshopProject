@@ -983,11 +983,11 @@ button.btn:hover {
 }
 
 .sidebar .tab-news .tn-img {
-    width: 100px;
+    width: 150px;
 }
 
 .sidebar .tab-news .tn-img img {
-    width: 100px;
+    width: 150px;
 }
 
 .sidebar .tab-news .tn-title {
@@ -1354,6 +1354,7 @@ button.btn:hover {
 .footer-bottom .template-by p a:hover {
     color: #ffffff;
 }
+
 
 @media (max-width: 768.98px) {
     .footer-bottom .copyright,

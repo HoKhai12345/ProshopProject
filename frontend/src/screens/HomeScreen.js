@@ -11,6 +11,7 @@ import Fashion from "../components/Fashion";
 import LeftManyPage from "../components/LeftManyPage"
 import RightManyPage from "../components/RightManyPage";
 import StrangeNews from "../components/StrangeNews";
+import SliderNews from "../components/SliderNews";
 import NewsRightSocker from "../components/NewsRightSocker";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -171,13 +172,18 @@ const HomeScreen = ({ match }) => {
           <div class="container">
             <div class="row">
               {/* Ghép giao diện phần giao thông */}
-              <Traffic traffic={newsTraffic}></Traffic>
+              <SliderNews data={newsTraffic} title="Giao thông "></SliderNews>
+              {/* <Traffic traffic={newsTraffic}></Traffic> */}
               {/* Ghép component phần ngôi sao */}
-              <Star star={newsStar}></Star>
+              <SliderNews data={newsStar} title="Ngôi sao"></SliderNews>
+              {/* <Star star={newsStar}></Star> */}
               {/* Ghép component phần nấu ăn */}
-              <Cooking cooking={newsCooking}></Cooking>
+              <SliderNews data={newsCooking} title="Nấu ăn"></SliderNews>
+              {/* <Cooking cooking={newsCooking}></Cooking> */}
               {/* Ghép component phần thời trang */}
-              <Fashion fashion={newsFashion}></Fashion>
+              <SliderNews data={newsFashion} title="Thời trang"></SliderNews>
+
+              {/* <Fashion fashion={newsFashion}></Fashion> */}
             </div>
           </div>
         </div>
@@ -185,7 +191,9 @@ const HomeScreen = ({ match }) => {
             <div class="container">
                 <div class="row">
                     <LeftManyPage funny={newsFunny} social={newsSocial} beautify={newsBeautify}></LeftManyPage>
+                    <div class="col-md-6"> 
                     <RightManyPage economy={newsEconomy} family={newsFamily} travel={newsTravel}></RightManyPage>
+                    </div>
                 </div>
             </div>
         </div>

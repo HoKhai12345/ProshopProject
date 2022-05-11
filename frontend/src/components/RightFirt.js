@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Row } from "react-bootstrap";
 import Rating from "./Rating";
-import NewsRightSocker from "../components/NewsRightSocker";
+import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
 
@@ -13,7 +13,7 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const Traffic = ({ traffic }) => {
+const RightFirt = ({ data , title}) => {
   const dispatch = useDispatch();
   const settings = {
     dots: true,
@@ -26,35 +26,28 @@ const Traffic = ({ traffic }) => {
   };
   return (
     <>
-      <div class="col-md-6">
-        <h2>
-          Giao thông
-        </h2>
-        <div class="row cn-slider2">
-          <Slider {...settings}>
-            {traffic &&
-              traffic.map((value) => {
-                return (
-                  <div class="col-md-12" key={value.id}>
-                    <div class="cn-img">
-                      <img
-                        style={{ height: 142 }}
-                        src={"http://evideo.vn/cms/" + value.thumb}
-                      />
-                      <div class="cn-title">
+    <div class="sidebar-widget">
+                  <h2 class="sw-title">{title}</h2>
+                  <div class="news-list">
+                    {
+                        data && data.map((value)=>(
+                     <div class="nl-item">
+                      <div class="nl-img">
+                        <img  src={"http://evideo.vn/cms/" + value.thumb} />
+                      </div>
+                      <div class="nl-title">
                       <Link to={"/"+value.slugs+".html"}>
                         <a>{trimString(value.title, 40)}</a>
                         </Link>
                       </div>
                     </div>
+                        ))
+                    }
+            
                   </div>
-                );
-              })}
-          </Slider>
-        </div>
-      </div>
+                </div>
     </>
   );
 };
 
-export default Traffic;
+export default RightFirt;

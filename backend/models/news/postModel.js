@@ -70,4 +70,57 @@ Post.getDataByUuId = async (
     );
   return rows;
 };
+Post.getDataRelaredByslug = async (
+  slug,
+  categoryId,
+  result
+) => {
+  // console.log('dbConnectMysql', dbConnectMysql().query())
+  //   console.log(
+  //     "SELECT * FROM data_news_version_2_posts where categoryId =" +
+  //       categoryId +
+  //       " and title LIKE  '%" +
+  //       keyword +
+  //       "%'" +
+  //       " ORDER BY id DESC" +
+  //       " limit " +
+  //       offset +
+  //       "," +
+  //       limit
+  //   );
+  // console.log("SELECT * FROM data_news_version_2_posts where slugs != '" + slug + "' and categoryId = "+categoryId+" limit 6");
+  const [rows, fields] = await dbConnectMysql
+    .promise()
+    .query(
+      "SELECT * FROM data_news_version_2_posts where slugs != '" + slug + "' and categoryId = "+categoryId+" limit 6"
+    );
+  return rows;
+};
+
+Post.getDataInThisCateByslug = async (
+  slug,
+  categoryId,
+  result
+) => {
+   console.log("SELECT * FROM data_news_version_2_posts where slugs != '" + slug + "' and categoryId = "+categoryId+" limit 5,6");
+  const [rows, fields] = await dbConnectMysql
+    .promise()
+    .query(
+      "SELECT * FROM data_news_version_2_posts where slugs != '" + slug + "' and categoryId = "+categoryId+" limit 5,6"
+    );
+  return rows;
+};
+
+Post.getCountPostCate = async (
+  result
+) => {
+   console.log("SELECT data_news_version_2_category.name , count(data_news_version_2_posts.id) as countPost from data_news_version_2_posts , data_news_version_2_category.slugs INNER JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id GROUP BY data_news_version_2_posts.categoryId");
+  const [rows, fields] = await dbConnectMysql
+    .promise()
+    .query(
+      "SELECT data_news_version_2_category.name  , count(data_news_version_2_posts.id) as countPost , data_news_version_2_category.slugs from data_news_version_2_posts INNER JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id GROUP BY data_news_version_2_posts.categoryId"
+    );
+  return rows;
+};
+
 export default Post;

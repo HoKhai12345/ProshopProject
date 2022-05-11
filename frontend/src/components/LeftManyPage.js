@@ -45,33 +45,39 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href={"/"+value.slugs}>{trimString(value.title,40)}</a>
+                    <Link to={"/" + value.slugs}>
+                      <a>{trimString(value.title, 40)}</a>
+                    </Link>{" "}
                   </div>
                 </div>
               ))}
           </div>
           <div id="social" class="container tab-pane fade">
-          {social &&
+            {social &&
               social.map((value) => (
                 <div class="tn-news">
                   <div class="tn-img">
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href={"/"+value.slugs}>{trimString(value.title , 40)}</a>
+                    <Link to={"/" + value.slugs}>
+                      <a>{trimString(value.title, 40)}</a>
+                    </Link>{" "}
                   </div>
                 </div>
               ))}
           </div>
           <div id="beautify" class="container tab-pane fade">
-          {beautify &&
+            {beautify &&
               beautify.map((value) => (
                 <div class="tn-news">
                   <div class="tn-img">
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <a href={"/"+value.slugs}>{trimString(value.title , 40)}</a>
+                    <Link to={"/" + value.slugs}>
+                      <a>{trimString(value.title, 40)}</a>
+                    </Link>{" "}
                   </div>
                 </div>
               ))}
