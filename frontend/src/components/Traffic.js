@@ -42,7 +42,7 @@ const Traffic = ({ traffic }) => {
                         src={"http://evideo.vn/cms/" + value.thumb}
                       />
                       <div class="cn-title">
-                        <a href="">{trimString(value.title, 40)}</a>
+                        <a href={"/"+value.slugs}>{trimString(value.title, 40)}</a>
                       </div>
                     </div>
                   </div>

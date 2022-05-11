@@ -27,7 +27,7 @@ const NewsSlide = ({ news }) => {
                 <div class="tn-img">
                   <img src={"http://evideo.vn/cms/" + news.thumb} />
                   <div class="tn-title">
-                    <a href="">{news.title}</a>
+                    <a href={"/"+news.slugs}>{news.title}</a>
                   </div>
                 </div>
               </div>
