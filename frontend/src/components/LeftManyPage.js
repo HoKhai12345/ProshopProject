@@ -6,7 +6,9 @@ import Rating from "./Rating";
 import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
-
+import { listNewsFunny } from "../actions/productActions";
+import { listNewsSocialNetwork } from "../actions/productActions";
+import { listNewsBeautify } from "../actions/productActions";
 import { listNewsSocerRight } from "../actions/productActions";
 
 let trimString = function (string, length) {
@@ -15,6 +17,18 @@ let trimString = function (string, length) {
 
 const LeftManyPage = ({ social, funny, beautify }) => {
   const dispatch = useDispatch();
+      //dispatch giá trị cho bản tin hài hước
+      useEffect(() => {
+        dispatch(listNewsFunny("", 3, 0));
+      }, [dispatch]);
+        //dispatch giá trị cho bản tin mạng xã hội
+    useEffect(() => {
+      dispatch(listNewsSocialNetwork("", 3, 0));
+    }, [dispatch]);
+      //dispatch giá trị cho bản tin làm đẹp
+      useEffect(() => {
+        dispatch(listNewsBeautify("", 3, 0));
+      }, [dispatch]);
   return (
     <>
       <div class="col-md-6">
@@ -45,7 +59,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <Link to={"/" + value.slugs}>
+                    <Link to={"/" + value.slugs+".html"}>
                       <a>{trimString(value.title, 40)}</a>
                     </Link>{" "}
                   </div>
@@ -60,7 +74,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <Link to={"/" + value.slugs}>
+                    <Link to={"/" + value.slugs+".html"}>
                       <a>{trimString(value.title, 40)}</a>
                     </Link>{" "}
                   </div>
@@ -75,7 +89,7 @@ const LeftManyPage = ({ social, funny, beautify }) => {
                     <img src={"http://evideo.vn/cms/" + value.thumb} />
                   </div>
                   <div class="tn-title">
-                    <Link to={"/" + value.slugs}>
+                    <Link to={"/" + value.slugs+".html"}>
                       <a>{trimString(value.title, 40)}</a>
                     </Link>{" "}
                   </div>

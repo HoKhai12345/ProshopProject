@@ -11,14 +11,15 @@ const { sohaSocker, vnexpress } = constant();
 
 const index = asyncHandler(async (req, res) => {
   const categoryId = req.params.categoryId;
-  console.log("categoryId", categoryId);
+  console.log("categoryId", typeof categoryId);
   if (!categoryId) {
     res.json({ err: 1, msg: "thiếu tham số " });
   }
   const limit = req.query.limit ? req.query.limit : 10;
   const offset = req.query.offset ? req.query.offset : 0;
   const keyword = req.query.keyword ? req.query.keyword : "";
-  const data = await postModel.getListData(keyword, categoryId, limit, offset);
+
+     const data = await postModel.getListData(keyword, categoryId, limit, offset);
 
   res.json({
     err: 0,
@@ -38,6 +39,26 @@ const countPostCate = asyncHandler(async (req, res) => {
 });
 
 
+const listNewsByCate = asyncHandler(async (req, res) => {
+  console.log("req.params",req.params.categorySlugs);
+  const categorySlug = req.params.categorySlugs;
+  const limit = req.query.limit ? req.query.limit : 10;
+  const offset = req.query.offset ? req.query.offset : 0;
+  if(!categorySlug){
+    res.json({
+      err: 1,
+      msg: "Invalid params",
+    });
+  }else{
+    const data = await postModel.getDataBySlug(categorySlug , limit , offset);
+    res.json({
+      err: 0,
+      status: 1,
+      data: data,
+    });
+  }
+ 
+});
 
 
 
@@ -53,10 +74,10 @@ const newsDetail = asyncHandler(async (req, res) => {
   // const offset = req.query.offset ? req.query.offset : 0;
   // const keyword = req.query.keyword ? req.query.keyword : "";
   const data = await postModel.getDataByUuId(slug);
+ console.log("DAAAAAA",data);
+ if(data.length>0){
   const dataRelated = await postModel.getDataRelaredByslug(slug,data[0].categoryId);
   const dataInThisCategory = await postModel.getDataInThisCateByslug(slug,data[0].categoryId);
-
-  
   res.json({
     err: 0,
     status: 1,
@@ -64,6 +85,16 @@ const newsDetail = asyncHandler(async (req, res) => {
     dataRelated:dataRelated,
     dataInThisCategory:dataInThisCategory
   });
+ }else{
+  res.json({
+    err: 0,
+    status: 1,
+    data: [],
+    dataRelated:[],
+    dataInThisCategory:[]
+  });
+ }
+
 });
 
 const notApi = asyncHandler(async (req, res) => {
@@ -72,4 +103,4 @@ const notApi = asyncHandler(async (req, res) => {
     msg: "Invalid params",
   });
 });
-export { index, notApi , newsDetail ,countPostCate};
+export { index, notApi , newsDetail ,countPostCate,listNewsByCate};

@@ -6,6 +6,10 @@ import Rating from "./Rating";
 import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
+import { listNewsStar } from "../actions/productActions";
+import { listNewsCooking } from "../actions/productActions";
+
+import { listNewsFashion } from "../actions/productActions";
 
 import { listNewsSocerRight } from "../actions/productActions";
 
@@ -13,8 +17,27 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const SliderNews = ({ data , title }) => {
+const SliderNews = ({ data , title , slugCate }) => {
   const dispatch = useDispatch();
+
+
+
+   // dispatch giá trị cho bản tin giao thông
+   useEffect(() => {
+    dispatch(listNewsTraffic("", 4, 0));
+  }, [dispatch]);
+  // dispatch giá trị cho bản tin star
+  useEffect(() => {
+    dispatch(listNewsStar("", 4, 0));
+  }, [dispatch]);
+  // dispatch giá trị cho bản tin nấu ăn
+  useEffect(() => {
+    dispatch(listNewsCooking("", 4, 0));
+  }, [dispatch]);
+  //dispatch giá trị cho bản tin thời trang
+  useEffect(() => {
+    dispatch(listNewsFashion("", 4, 0));
+  }, [dispatch]);
   const settings = {
     dots: true,
     className: "slide2",
@@ -28,7 +51,9 @@ const SliderNews = ({ data , title }) => {
     <>
       <div class="col-md-6">
         <h2>
+        <Link to={"/cate/"+slugCate}>
           {title}
+          </Link>
         </h2>
         <div class="row cn-slider2">
           <Slider {...settings}>

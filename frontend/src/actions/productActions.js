@@ -164,7 +164,7 @@ export const listNewsStar = (keyword = '', limit = '' , offset = '') => async (
     dispatch({ type: "STAR_LIST_REQUEST" })
 
     const { data } = await axios.get(
-      `/api/news/39?keyword=${keyword}&limit=${limit}&offset=${offset}`
+      `/api/news/28?keyword=${keyword}&limit=${limit}&offset=${offset}`
     )
     console.log("dataSTAR",data);
 
@@ -409,6 +409,49 @@ export const newsBySlugs = async (slugs, result)=>{
   )
  return result(null , data)
 }
+
+// lấy bài viết của từng chuyên mục
+export const listNewsByCategory = (slugsCategory = '', limit = '' , offset = '') => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: "NEWS_BY_CATE_REQUEST" })
+
+    const { data } = await axios.get(
+      `/api/news/listNews/${slugsCategory}?limit=${limit}&offset=${offset}`
+      )
+    console.log("dataaaaaaaaaaaaa",data);
+
+    dispatch({
+      type: "NEWS_BY_CATE_SUCCESS",
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: "NEWS_BY_CATE_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+
+
+// lấy bài viết của từng chuyên mục nhưng ko dùng redux
+export const listNewsByCate = async(slugsCategory = '', limit = '' , offset = '' , result)=> {
+  console.log(`/api/news/listNews/${slugsCategory}&limit=${limit}&offset=${offset}`);
+  const { data } = await axios.get(
+    `/api/news/listNews/${slugsCategory}?limit=${limit}&offset=${offset}`
+  )
+ return result(null , data)
+}
+
+
+
+
+
 
 
 // lấy tổng số bản ghi của từng chuyên mục 

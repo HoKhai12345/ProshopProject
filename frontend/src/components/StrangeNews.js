@@ -14,6 +14,7 @@ let trimString = function (string, length) {
 };
 
 const Strange = ({ strange , readMore }) => {
+    
     const settings = {
         dots: true,
         className: "slide2",
@@ -35,7 +36,7 @@ const Strange = ({ strange , readMore }) => {
                                         <div class="mn-img">
                                             <img src={"http://evideo.vn/cms/" + value.thumb} />
                                             <div class="mn-title">
-                                            <Link to={"/" + value.slugs}>
+                                            <Link to={"/" + value.slugs + ".html"}>
                                     <a>{trimString(value.title, 40)}</a>
                                   </Link>
                                             </div>
@@ -48,10 +49,12 @@ const Strange = ({ strange , readMore }) => {
 
                         <div class="col-lg-3">
                             <div class="mn-list">
+                                <Link to={"/cate/Xu-huong"}>
                                 <h2>Xu hướng</h2>
+                                </Link>                                
                                 <ul>
                                     {readMore && readMore.map((value)=>(
-                                    <li> <Link to={"/" + value.slugs}>
+                                    <li> <Link to={"/" + value.slugs + ".html"}>
                                     <a>{trimString(value.title, 40)}</a>
                                   </Link>{" "}</li>
                                     ))}

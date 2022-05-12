@@ -1,62 +1,62 @@
 export const CATEGORYIDCONFIG = [
     {
         id:36,
-        slug:"bong-da",
+        slug:"Bong-da",
         categoryName:"Bóng đá"
     },
     {
         id:37,
-        slug:"giao-thong",
+        slug:"Giao-thong",
         categoryName:"Giao Thông"
     },
     {
         id:44,
-        slug:"kinh-te",
+        slug:"Kinh-te",
         categoryName:"Kinh tế"
     },
     {
-        id:39,
-        slug:"ngoi-sao",
+        id:28,
+        slug:"Ngoi-sao",
         categoryName:"Ngôi sao"
     },
     {
         id:41,
-        slug:"nau-an",
+        slug:"Nau-an",
         categoryName:"Nấu ăn"
     },
     {
         id:42,
-        slug:"thoi-trang",
+        slug:"Thoi-trang",
         categoryName:"Thời trang"
     },
     {
         id:25,
-        slug:"mang-xa-hoi",
+        slug:"Mang-xa-hoi",
         categoryName:"Mạng xã hội"
     },
     {
         id:27,
-        slug:"hai-huoc",
+        slug:"Hai-huoc",
         categoryName:"Hài Hước"
     },
     {
         id:40,
-        slug:"lam-dep",
+        slug:"Lam-dep",
         categoryName:"Làm đẹp"
     },
     {
         id:29,
-        slug:"gia-dinh",
-        categoryName:"Gia đình"
+        slug:"Fitness",
+        categoryName:"Fitness"
     },
     {
         id:178,
-        slug:"du-lich",
-        categoryName:"Du lịch"
+        slug:"Thoi-tiet",
+        categoryName:"Thời tiết"
     },
     {
         id:43,
-        slug:"xu-huong",
+        slug:"Xu-huong",
         categoryName:"Xu hướng"
     },
 ]
