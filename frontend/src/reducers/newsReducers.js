@@ -255,6 +255,19 @@ export const countPostCate = (state = { count: [] }, action) => {
   }
 }
 
+export const listNewBySlugReducer = (state = { news: [] }, action) => {
+  switch (action.type) {
+    case "NEWS_BY_CATE_REQUEST":
+      return { loading: true, news: [] }
+    case "NEWS_BY_CATE__SUCCESS":
+      return { loading: false, news: action.payload }
+    case "NEWS_BY_CATE__FAIL":
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 
 // export const newsListFashionReducer = (state = { news: [] }, action) => {
 //   switch (action.type) {

@@ -6,7 +6,9 @@ import Rating from "./Rating";
 import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
-
+import { listNewsTravel } from "../actions/productActions";
+import { listNewsFamily } from "../actions/productActions";
+import { listNewsEconomy } from "../actions/productActions";
 import { listNewsSocerRight } from "../actions/productActions";
 
 let trimString = function (string, length) {
@@ -16,6 +18,18 @@ let trimString = function (string, length) {
 const RightManyPage = ({ economy, family, travel }) => {
   console.log("economy",economy);
   const dispatch = useDispatch();
+        //dispatch giá trị cho bản tin gia đình 
+        useEffect(() => {
+          dispatch(listNewsFamily("", 3, 0));
+        }, [dispatch]);
+          //dispatch giá trị cho bản tin du lịch
+      useEffect(() => {
+        dispatch(listNewsTravel("", 3, 0));
+      }, [dispatch]);
+        //dispatch giá trị cho bản tin kinh tế 
+        useEffect(() => {
+          dispatch(listNewsEconomy("", 3, 0));
+        }, [dispatch]);
   return (
     <>
       {/* <div class="col-md-6"> */}

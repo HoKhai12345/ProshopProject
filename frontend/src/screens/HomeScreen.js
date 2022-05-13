@@ -105,64 +105,17 @@ const HomeScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listNewsSocerSlide(keyword, 1, 0));
   }, [dispatch, keyword, limit, offset]);
-  // dispatch giá trị cho bản tin giao thông
-  useEffect(() => {
-    dispatch(listNewsTraffic(keyword, 4, 0));
-  }, [dispatch, keyword]);
-  // dispatch giá trị cho bản tin star
-  useEffect(() => {
-    dispatch(listNewsStar(keyword, 4, 0));
-  }, [dispatch, keyword, limit, offset]);
-  // dispatch giá trị cho bản tin nấu ăn
-  useEffect(() => {
-    dispatch(listNewsCooking(keyword, 4, 0));
-  }, [dispatch, keyword, limit, offset]);
-  //dispatch giá trị cho bản tin thời trang
-  useEffect(() => {
-    dispatch(listNewsFashion(keyword, 4, 0));
-  }, [dispatch, keyword, limit, offset]);
-    //dispatch giá trị cho bản tin hài hước
-    useEffect(() => {
-      dispatch(listNewsFunny("", 3, 0));
-    }, [dispatch, keyword, limit, offset]);
-      //dispatch giá trị cho bản tin mạng xã hội
-  useEffect(() => {
-    dispatch(listNewsSocialNetwork("", 3, 0));
-  }, [dispatch, limit, offset]);
-    //dispatch giá trị cho bản tin làm đẹp
-    useEffect(() => {
-      dispatch(listNewsBeautify("", 3, 0));
-    }, [dispatch, limit, offset]);
-
-      //dispatch giá trị cho bản tin gia đình 
-      useEffect(() => {
-        dispatch(listNewsFamily("", 3, 0));
-      }, [dispatch]);
-        //dispatch giá trị cho bản tin du lịch
-    useEffect(() => {
-      dispatch(listNewsTravel("", 3, 0));
-    }, [dispatch]);
-      //dispatch giá trị cho bản tin kinh tế 
-      useEffect(() => {
-        dispatch(listNewsEconomy("", 3, 0));
-      }, [dispatch]);
   return (
     <>
-      {/* <Meta />
-      {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link to='/' className='btn btn-light'>
-          Go Back
-        </Link>
-      )}
-      <h1>Latest Products</h1> */}
 
       <>
         {/* Ghep giao dien chuyen muc bong da ( categoryId = 37 ) */}
         <div style={{ paddingTop: 0 }} class="top-news">
           <div class="container">
+            <Link to={"/cate/Bong-da"}>
             <h3>Bóng đá</h3>
+            </Link>
+            
             <Row>
               <NewsSlide news={news} />
             </Row>
@@ -172,16 +125,16 @@ const HomeScreen = ({ match }) => {
           <div class="container">
             <div class="row">
               {/* Ghép giao diện phần giao thông */}
-              <SliderNews data={newsTraffic} title="Giao thông "></SliderNews>
+              <SliderNews data={newsTraffic} title="Giao thông" slugCate="Giao-thong"></SliderNews>
               {/* <Traffic traffic={newsTraffic}></Traffic> */}
               {/* Ghép component phần ngôi sao */}
-              <SliderNews data={newsStar} title="Ngôi sao"></SliderNews>
+              <SliderNews data={newsStar} title="Ngôi sao" slugCate="Ngoi-sao"></SliderNews>
               {/* <Star star={newsStar}></Star> */}
               {/* Ghép component phần nấu ăn */}
-              <SliderNews data={newsCooking} title="Nấu ăn"></SliderNews>
+              <SliderNews data={newsCooking} title="Nấu ăn" slugCate="Nau-an"></SliderNews>
               {/* <Cooking cooking={newsCooking}></Cooking> */}
               {/* Ghép component phần thời trang */}
-              <SliderNews data={newsFashion} title="Thời trang"></SliderNews>
+              <SliderNews data={newsFashion} title="Thời trang" slugCate="Thoi-trang"></SliderNews>
 
               {/* <Fashion fashion={newsFashion}></Fashion> */}
             </div>

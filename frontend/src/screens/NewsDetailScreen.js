@@ -52,6 +52,7 @@ const NewsDetailScreen = ({ history, match }) => {
   const [dataInThisCategory, setDataInThisCategory] = useState();
   const [newCategoryId, setNewCategoryId] = useState(0);
   const [nameCate, setNameCate] = useState("");
+  const [slugCate , setSlugCate ] = useState("");
   const slug = match.params.slugNews;
   const categoryId = decodeURI(match.params.categoryId);
   //dispatch giá trị cho bản tin gia đình
@@ -66,9 +67,7 @@ const NewsDetailScreen = ({ history, match }) => {
   useEffect(() => {
     dispatch(listNewsEconomy("", 3, 0));
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(countCatePost());
-  }, []);
+
   if (!slug) {
     history.push("/");
   }
@@ -76,6 +75,7 @@ const NewsDetailScreen = ({ history, match }) => {
     newsBySlugs(slug, (err, data) => {
       console.log("DATA", data);
       if (data.data.length > 0) {
+        
         setNewsDetail(data.data[0]);
         setRelatedNews(data.dataRelated);
         setNewCategoryId(data.data[0].categoryId);
@@ -85,12 +85,13 @@ const NewsDetailScreen = ({ history, match }) => {
           console.log("newCategoryId", data.data[0].categoryId);
           if (value.id == data.data[0].categoryId) {
             setNameCate(value.categoryName);
+            setSlugCate(value.slug);
             console.log("NEWSCATE", nameCate);
           }
         });
       } else {
         console.log("KO CO DATA");
-        history.push("/");
+        history.push("/404not-fount");
       }
     });
   }, [slug]);
@@ -165,7 +166,10 @@ const NewsDetailScreen = ({ history, match }) => {
               </Link>
             </li>
             <li class="breadcrumb-item">
-              <a href="#">{nameCate}</a>
+              <Link to={"/cate/"+slugCate}>
+              <a>{nameCate}</a>
+              </Link>
+             
             </li>
             {/* <li class="breadcrumb-item active">News details</li> */}
           </ul>
@@ -265,7 +269,7 @@ const NewsDetailScreen = ({ history, match }) => {
                   </div>
                 </div>
 
-                <div class="sidebar-widget">
+                {/* <div class="sidebar-widget">
                   <h2 class="sw-title">Tags Cloud</h2>
                   <div class="tags">
                     <a href="">National</a>
@@ -276,7 +280,7 @@ const NewsDetailScreen = ({ history, match }) => {
                     <a href="">Technology</a>
                     <a href="">Trades</a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

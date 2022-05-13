@@ -4,7 +4,8 @@ import {
   index,
   notApi,
   newsDetail,
-  countPostCate
+  countPostCate,
+  listNewsByCate
 } from '../../controllers/worker/sockerController.js'
 import { protect, admin } from '../../middleware/authMiddleware.js'
 
@@ -12,7 +13,9 @@ import { protect, admin } from '../../middleware/authMiddleware.js'
 router.route('/').get(notApi);
 router.route('/countPostCate').get(countPostCate);
 router.route('/newsDetail').get(newsDetail);
+router.route('/listNews/:categorySlugs').get(listNewsByCate);
 router.route('/:categoryId').get(index);
+
 
 
 

@@ -33,7 +33,7 @@ const RelatedNews = ({ related , title}) => {
         <h2>
         {title}
         </h2>
-        {/* <div class="row cn-slider2"> */}
+        <div class="row cn-slider2">
           <Slider {...settings}>
             {related && related != {} &&
               related.map((value) => {
@@ -45,7 +45,7 @@ const RelatedNews = ({ related , title}) => {
                         src={"http://evideo.vn/cms/" + value.thumb}
                       />
                       <div class="cn-title">
-                      <Link to={"/"+value.slugs+".html"+".html"}>
+                      <Link to={"/"+value.slugs+".html"}>
                         <a>{trimString(value.title, 40)}</a>
                         </Link>
                       </div>
@@ -54,7 +54,7 @@ const RelatedNews = ({ related , title}) => {
                 );
               })}
           </Slider>
-{/* </div> */}
+</div>
 </div>
 </div>
     </>

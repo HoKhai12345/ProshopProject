@@ -20,6 +20,8 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import NewsDetailScreen from './screens/NewsDetailScreen'
+import notFount404 from './screens/notFount404'
+import CategoryScreen from './screens/CategoryScreen'
 // import "~slick-carousel/slick/slick.css"; 
 // import "~slick-carousel/slick/slick-theme.css";
 const App = () => {
@@ -29,7 +31,11 @@ const App = () => {
       <HeaderNews />
       <main className='py-3'>
         <Container>
-
+        <Route
+            path='/404not-fount'
+            component={notFount404}
+            exact
+          />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
@@ -60,7 +66,10 @@ const App = () => {
             component={HomeScreen}
             exact
           />
+          <Route path={'/cate/:categorySlug'} component={CategoryScreen} />
           <Route path={'/:slugNews'+'.html'} component={NewsDetailScreen} />
+
+
           <Route path='/' component={HomeScreen} exact />
 
         </Container>

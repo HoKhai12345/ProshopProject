@@ -6,6 +6,7 @@ import Rating from "./Rating";
 import NewsRightSocker from "./NewsRightSocker";
 import { listNewsTraffic } from "../actions/productActions";
 import Slider from "react-slick";
+import { countCatePost } from "../actions/productActions";
 
 import { listNewsSocerRight } from "../actions/productActions";
 
@@ -14,8 +15,13 @@ let trimString = function (string, length) {
 };
 
 const CountNewsCate = ({ data, title }) => {
-    console.log("data",data);
   const dispatch = useDispatch();
+    // lấy tổng bản ghi theo từng chuyên mục trong store
+    const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
+    const { count } = countNewsPostCate;
+    useEffect(() => {
+      dispatch(countCatePost());
+    }, []);
   const settings = {
     dots: true,
     className: "slide2",
@@ -34,7 +40,7 @@ const CountNewsCate = ({ data, title }) => {
             {data &&
               data.map((value) => (
                 <li>
-                <Link to={"/"+value.slugs}>
+                <Link to={"/cate/"+value.slugs}>
                   <a>{value.name}</a>
                   </Link>
                   <span>({value.countPost})</span>

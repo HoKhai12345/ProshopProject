@@ -24,7 +24,8 @@ import {
   newsListEconomyReducer,
   newsListFamilyReducer,
   newsListTravelReducer,
-  countPostCate
+  countPostCate,
+  listNewBySlugReducer
 } from './reducers/newsReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
@@ -43,6 +44,7 @@ import {
   orderDeliverReducer,
   orderListMyReducer,
   orderListReducer,
+  
 } from './reducers/orderReducers'
 import { listNewsEconomy, listNewsFamily, listNewsTravel } from './actions/productActions'
 
@@ -80,7 +82,8 @@ const reducer = combineReducers({
   listNewsFamily: newsListFamilyReducer,
   listNewsTravel: newsListTravelReducer,
   listNewsEconomy: newsListEconomyReducer,
-  countNewsPostCate:countPostCate
+  countNewsPostCate:countPostCate,
+  listNewsByCategory: listNewBySlugReducer
    
 })
 
