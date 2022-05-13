@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,13 +17,14 @@ import Meta from "../components/Meta";
 import RightFirt from "../components/RightFirt";
 import RightManyPage from "../components/RightManyPage";
 import CountNewsCate from "../components/CountNewsCate";
-
+import PaginateCustom from "../components/PaginateCustom";
 
 import {
   listProductDetails,
   createProductReview,
   listProducts,
   listNewsByCate,
+  listNewsByCate2,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
@@ -36,6 +37,8 @@ const CategoryScreen = ({ history, match }) => {
   const [getOffset, setOffset] = useState(0);
   const [getCateSlug, setCateSlug] = useState("");
   const [getCateName, setCateName] = useState("");
+  const [getPages, setPages] = useState(1);
+  const [getPage, setPage] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -48,45 +51,60 @@ const CategoryScreen = ({ history, match }) => {
   const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
   const { count } = countNewsPostCate;
 
-
   const { newsFamily } = newsFamilyPage;
   const { newsTravel } = newsTravelPage;
   const { newsEconomy } = newsEconomyPage;
 
   const categorySlug = match.params.categorySlug;
-  console.log("categorySlug",categorySlug);
-  
+  console.log("categorySlug", categorySlug);
+
   useEffect(() => {
     setCateSlug(categorySlug);
     listNewsByCate(categorySlug, getLimit, getOffset, (err, data) => {
-      console.log("data", data);
       setListNews(data.data);
-      setCateName(data.data[0].nameCate)
+      setCateName(data.data[0].nameCate);
+      setPages(Math.ceil(data.count[0].countData/10));
     });
-  }, [categorySlug ]);
-     
+  }, [categorySlug]);
+
+  // const cbPage = async (data) => {
+  //   setPage(data);
+  // };
+  const reloadData = async () => {
+    const dataAfterCbPage = await listNewsByCate2(
+      categorySlug,
+      10,
+      10 * (getPage-1)
+    );
+    console.log("dataAfterCbPage", dataAfterCbPage);
+
+    setListNews(dataAfterCbPage?.data);
+  };
+
+  useEffect(() => {
+    reloadData();
+  }, [getPage]);
   return (
     <>
       <div class="tab-news">
-
         <div class="row">
           <div class="col-8">
-          <div class="container">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <Link to={`/`}>
-                <a href="/">Trang chủ</a>
-              </Link>
-            </li>
-            <li class="breadcrumb-item">
-              <Link to={"/cate/"+getCateSlug}>
-              <a>{getCateName}</a>
-              </Link>
-             
-            </li>
-            {/* <li class="breadcrumb-item active">News details</li> */}
-          </ul>
-        </div>
+            <div class="container">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <Link to={`/`}>
+                    <a href="/">Trang chủ</a>
+                  </Link>
+                </li>
+                <li class="breadcrumb-item">
+                  <Link to={"/cate/" + getCateSlug}>
+                    <a>{getCateName}</a>
+                  </Link>
+                </li>
+                {/* <li class="breadcrumb-item active">News details</li> */}
+              </ul>
+            </div>
+
             <div class="tab-content" id="myTabContent">
               <div id="economy" class="container tab-pane active">
                 {listNews &&
@@ -104,10 +122,15 @@ const CategoryScreen = ({ history, match }) => {
                   ))}
               </div>
             </div>
+            <PaginateCustom
+              pages={getPages}
+              page={getPage}
+              categorySlug={categorySlug}
+              setPage={setPage}
+            ></PaginateCustom>
           </div>
           <div class="col-4">
-          <div class="single-news">
-      
+            <div class="single-news">
               <div class="sidebar">
                 <div class="sidebar-widget">
                   <div class="image">
@@ -133,9 +156,11 @@ const CategoryScreen = ({ history, match }) => {
                     </a>
                   </div>
                 </div>
-                 {/* tổng bản ghi trong các chuyên mục */}
-                 <CountNewsCate data={count} title={"Các chuyên mục khác"}></CountNewsCate>
-            
+                {/* tổng bản ghi trong các chuyên mục */}
+                <CountNewsCate
+                  data={count}
+                  title={"Các chuyên mục khác"}
+                ></CountNewsCate>
 
                 <div class="sidebar-widget">
                   <div class="image">
@@ -157,8 +182,8 @@ const CategoryScreen = ({ history, match }) => {
                     <a href="">Trades</a>
                   </div>
                 </div> */}
-        </div>
-      </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

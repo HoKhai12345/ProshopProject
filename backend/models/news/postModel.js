@@ -140,4 +140,17 @@ Post.getDataBySlug = async (
   return rows;
 };
 
+Post.getCountDataBySlug = async (
+  categorySlug,
+  result
+  )=> {
+    console.log("SELECT count(data_news_version_2_posts.id) FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '"+categorySlug+"' )");
+  const [rows, fields] = await dbConnectMysql
+    .promise()
+    .query(
+      "SELECT count(data_news_version_2_posts.id) as countData FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '"+categorySlug+"' )"
+    );
+  return rows;
+  }
+
 export default Post;

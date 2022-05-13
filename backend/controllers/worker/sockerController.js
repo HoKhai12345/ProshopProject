@@ -51,10 +51,12 @@ const listNewsByCate = asyncHandler(async (req, res) => {
     });
   }else{
     const data = await postModel.getDataBySlug(categorySlug , limit , offset);
+    const count = await postModel.getCountDataBySlug(categorySlug);
     res.json({
       err: 0,
       status: 1,
       data: data,
+      count: count
     });
   }
  
