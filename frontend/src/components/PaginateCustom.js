@@ -12,18 +12,75 @@ const PaginateCustom = ({
   categorySlug = "",
   setPage = () => {},
 }) => {
-  const onChangePrev = () => {
-    if (page) {
-    }
-    setPage(page - 1);
-  };
 
+  const onChangePrev = () => {
+    if (page >1) {
+      console.log("PAGE2",page);
+
+      setPage(page - 1);
+    }
+
+  };
+  const onChangeNext = ()=>{
+    if (page < pages) {
+
+      setPage(page + 1);
+    }
+
+  }
+  const onChangeLast = ()=>{
+      setPage(pages);
+  }
+  const onChangeFirts = ()=>{
+    setPage(1);
+}
+
+
+  
+  const array =[];
+  console.log("PAGE",page);
+
+  if(page >1 && page <= pages){
+    if(page !=2 ){
+      array.push(page-2);
+
+    }
+    array.push(page-1);
+    array.push(page);
+    if(page!=pages){
+      array.push(page+1);
+      if(page!=pages-1){
+        array.push(page+2);
+      
+      }
+    }
+    // array.push(page+1);
+    // array.push(page+1);
+    console.log("PAGE1",page);
+  }else if(page = 1 ){
+    console.log("PAGE2",page);
+
+    array.push(page);
+    array.push(page+1);
+    array.push(page+2);
+  } 
+  else{
+    console.log("PAGE3",page);
+    // array.slice(page);
+    array.push(page-2);
+    array.push(page-1);
+    array.push(page);
+  }
+  
+ 
+ 
+  console.log("ARRRRRRRRRRRRRRR",[...Array(pages).keys()]);
   return (
     pages > 1 && (
       <Pagination>
-        <Pagination.First />
+        <Pagination.First onClick={onChangeFirts}/>
         <Pagination.Prev onClick={onChangePrev} />
-        {[...Array(pages).keys()].map((x) => (
+        {array.map((x) => (
           //   <LinkContainer
           //     key={x + 1}
           //     to={ categoryId
@@ -32,14 +89,16 @@ const PaginateCustom = ({
           //     }
           //   >
           <Pagination.Item
-            onClick={() => setPage(x + 1)}
-            value={x + 1}
-            active={x + 1 === page}
+            onClick={() => setPage(x)}
+            value={x}
+            active={x === page}
           >
-            {x + 1}
+            {x}
           </Pagination.Item>
           //   </LinkContainer>
         ))}
+        <Pagination.Next onClick={onChangeNext} />
+        <Pagination.Last onClick={onChangeLast} />
       </Pagination>
     )
   );
