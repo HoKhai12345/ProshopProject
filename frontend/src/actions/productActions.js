@@ -452,6 +452,23 @@ export const listNewsByCate = async (
   );
   return result(null, data);
 };
+
+// lấy bài viết search nhưng ko dùng redux
+export const listNewsSearch = async (
+  keyword = "",
+  limit = "",
+  offset = "",
+  result
+) => {
+  console.log(
+    `/api/news/search?keyword=${keyword}&limit=${limit}&offset=${offset}`
+  );
+  const { data } = await axios.get(
+    `/api/news/search?keyword=${keyword}&limit=${limit}&offset=${offset}`
+  );
+  return result(null, data);
+};
+
 export const listNewsByCate2 = async (
   slugsCategory = "",
   limit = "",

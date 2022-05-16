@@ -25,17 +25,18 @@ import {
   listProducts,
   listNewsByCate,
   listNewsByCate2,
+  listNewsSearch,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
-const CategoryScreen = ({ history, match }) => {
+const SearchNewsScreen = ({ history, match }) => {
   const [listNews, setListNews] = useState();
   const [getLimit, setLimit] = useState(10);
   const [getOffset, setOffset] = useState(0);
-  const [getCateSlug, setCateSlug] = useState("");
+  const [getSearch, setSearch] = useState("");
   const [getCateName, setCateName] = useState("");
   const [getPages, setPages] = useState(1);
   const [getPage, setPage] = useState(1);
@@ -55,25 +56,21 @@ const CategoryScreen = ({ history, match }) => {
   const { newsTravel } = newsTravelPage;
   const { newsEconomy } = newsEconomyPage;
 
-  const categorySlug = match.params.categorySlug;
-  console.log("categorySlug", categorySlug);
+  const keyword = match.params.keyword;
 
   useEffect(() => {
-    setCateSlug(categorySlug);
-    listNewsByCate(categorySlug, getLimit, getOffset, (err, data) => {
+    listNewsSearch(keyword, getLimit, getOffset, (err, data) => {
       setListNews(data.data);
-      setCateName(data.data[0].nameCate);
-      setPages(Math.ceil(data.count[0].countData / 10));
-      setPage(1);
+      setPages(Math.ceil(data.countRecord / 10));
     });
-  }, [categorySlug]);
+  }, [keyword]);
 
   // const cbPage = async (data) => {
   //   setPage(data);
   // };
   const reloadData = async () => {
-    const dataAfterCbPage = await listNewsByCate2(
-      categorySlug,
+    const dataAfterCbPage = await listNewsSearch(
+      keyword,
       10,
       10 * (getPage - 1)
     );
@@ -98,25 +95,21 @@ const CategoryScreen = ({ history, match }) => {
                   </Link>
                 </li>
                 <li class="breadcrumb-item">
-                  <Link to={"/cate/" + getCateSlug}>
-                    <a>{getCateName}</a>
+                  <Link>
+                    <a>{keyword}</a>
                   </Link>
                 </li>
                 {/* <li class="breadcrumb-item active">News details</li> */}
               </ul>
             </div>
-
+            {/* 
             <div class="tab-content" id="myTabContent">
               <div id="economy" class="container tab-pane active">
                 {listNews &&
                   listNews.map((value) => (
                     <div class="tn-news">
                       <div class="tn-img">
-                        <img
-                          src={"http://evideo.vn/cms/" + value.thumb}
-                          alt="HTML5 Icon"
-                        />
-                        <h6>{"" + value.thumb}</h6>
+                        <img src={"http://evideo.vn/cms/" + value.thumb} />
                       </div>
                       <div class="tn-title">
                         <Link to={"/" + value.slugs + ".html"}>
@@ -126,11 +119,11 @@ const CategoryScreen = ({ history, match }) => {
                     </div>
                   ))}
               </div>
-            </div>
+            </div> */}
+
             <PaginateCustom
               pages={getPages}
               page={getPage}
-              categorySlug={categorySlug}
               setPage={setPage}
             ></PaginateCustom>
           </div>
@@ -165,7 +158,7 @@ const CategoryScreen = ({ history, match }) => {
                 <CountNewsCate
                   data={count}
                   title={"Các chuyên mục khác"}
-                  currentCategory={getCateName}
+                  //   currentCategory={getCateName}
                 ></CountNewsCate>
 
                 <div class="sidebar-widget">
@@ -197,4 +190,4 @@ const CategoryScreen = ({ history, match }) => {
   );
 };
 
-export default CategoryScreen;
+export default SearchNewsScreen;

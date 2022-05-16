@@ -12,73 +12,61 @@ const PaginateCustom = ({
   categorySlug = "",
   setPage = () => {},
 }) => {
-
   const onChangePrev = () => {
-    if (page >1) {
-      console.log("PAGE2",page);
+    if (page > 1) {
+      console.log("PAGE2", page);
 
       setPage(page - 1);
     }
-
   };
-  const onChangeNext = ()=>{
+  const onChangeNext = () => {
     if (page < pages) {
-
       setPage(page + 1);
     }
-
-  }
-  const onChangeLast = ()=>{
-      setPage(pages);
-  }
-  const onChangeFirts = ()=>{
+  };
+  const onChangeLast = () => {
+    setPage(pages);
+  };
+  const onChangeFirts = () => {
     setPage(1);
-}
+  };
 
+  const array = [];
+  // console.log("PAGE",page);
 
-  
-  const array =[];
-  console.log("PAGE",page);
-
-  if(page >1 && page <= pages){
-    if(page !=2 ){
-      array.push(page-2);
-
+  if (page > 1 && page <= pages) {
+    if (page != 2) {
+      array.push(page - 2);
     }
-    array.push(page-1);
+    array.push(page - 1);
     array.push(page);
-    if(page!=pages){
-      array.push(page+1);
-      if(page!=pages-1){
-        array.push(page+2);
-      
+    if (page != pages) {
+      array.push(page + 1);
+      if (page != pages - 1) {
+        array.push(page + 2);
       }
     }
     // array.push(page+1);
     // array.push(page+1);
-    console.log("PAGE1",page);
-  }else if(page = 1 ){
-    console.log("PAGE2",page);
+    // console.log("PAGE1",page);
+  } else if ((page = 1)) {
+    // console.log("PAGE2",page);
 
     array.push(page);
-    array.push(page+1);
-    array.push(page+2);
-  } 
-  else{
-    console.log("PAGE3",page);
+    array.push(page + 1);
+    array.push(page + 2);
+  } else {
+    // console.log("PAGE3",page);
     // array.slice(page);
-    array.push(page-2);
-    array.push(page-1);
+    array.push(page - 2);
+    array.push(page - 1);
     array.push(page);
   }
-  
- 
- 
-  console.log("ARRRRRRRRRRRRRRR",[...Array(pages).keys()]);
+
   return (
     pages > 1 && (
       <Pagination>
-        <Pagination.First onClick={onChangeFirts}/>
+        <Pagination.First onClick={onChangeFirts} />
         <Pagination.Prev onClick={onChangePrev} />
         {array.map((x) => (
           //   <LinkContainer

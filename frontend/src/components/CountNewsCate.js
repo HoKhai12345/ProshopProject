@@ -14,14 +14,14 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const CountNewsCate = ({ data, title }) => {
+const CountNewsCate = ({ data, title, currentCategory }) => {
   const dispatch = useDispatch();
-    // lấy tổng bản ghi theo từng chuyên mục trong store
-    const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
-    const { count } = countNewsPostCate;
-    useEffect(() => {
-      dispatch(countCatePost());
-    }, []);
+  // lấy tổng bản ghi theo từng chuyên mục trong store
+  const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
+  const { count } = countNewsPostCate;
+  useEffect(() => {
+    dispatch(countCatePost());
+  }, []);
   const settings = {
     dots: true,
     className: "slide2",
@@ -38,14 +38,27 @@ const CountNewsCate = ({ data, title }) => {
         <div class="category">
           <ul>
             {data &&
-              data.map((value) => (
-                <li>
-                <Link to={"/cate/"+value.slugs}>
-                  <a>{value.name}</a>
-                  </Link>
-                  <span>({value.countPost})</span>
-                </li>
-              ))}
+              data.map((value) => {
+                if (currentCategory == value.name) {
+                  return (
+                    <li className="activeCurrentCate">
+                      <Link to={"/cate/" + value.slugs}>
+                        <a>{value.name}</a>
+                      </Link>
+                      <span>({value.countPost})</span>
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li>
+                      <Link to={"/cate/" + value.slugs}>
+                        <a>{value.name}</a>
+                      </Link>
+                      <span>({value.countPost})</span>
+                    </li>
+                  );
+                }
+              })}
           </ul>
         </div>
       </div>

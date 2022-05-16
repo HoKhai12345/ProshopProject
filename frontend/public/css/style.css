@@ -1365,3 +1365,11 @@ button.btn:hover {
 
 
 /* css  404 not fount  */
+
+
+/**********************************/
+/********** Cate CSS ************/
+/**********************************/
+.activeCurrentCate{
+    background: radial-gradient(#e32411, transparent);
+}

@@ -52,7 +52,7 @@ const NewsDetailScreen = ({ history, match }) => {
   const [dataInThisCategory, setDataInThisCategory] = useState();
   const [newCategoryId, setNewCategoryId] = useState(0);
   const [nameCate, setNameCate] = useState("");
-  const [slugCate , setSlugCate ] = useState("");
+  const [slugCate, setSlugCate] = useState("");
   const slug = match.params.slugNews;
   const categoryId = decodeURI(match.params.categoryId);
   //dispatch giá trị cho bản tin gia đình
@@ -75,7 +75,6 @@ const NewsDetailScreen = ({ history, match }) => {
     newsBySlugs(slug, (err, data) => {
       console.log("DATA", data);
       if (data.data.length > 0) {
-        
         setNewsDetail(data.data[0]);
         setRelatedNews(data.dataRelated);
         setNewCategoryId(data.data[0].categoryId);
@@ -96,11 +95,6 @@ const NewsDetailScreen = ({ history, match }) => {
     });
   }, [slug]);
 
-
-
-
-
-
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -118,15 +112,15 @@ const NewsDetailScreen = ({ history, match }) => {
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate;
 
-  useEffect(() => {
-    if (successProductReview) {
-      alert("Review Submitted!");
-      setRating(0);
-      setComment("");
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    }
-    dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match, successProductReview]);
+  // useEffect(() => {
+  //   if (successProductReview) {
+  //     alert("Review Submitted!");
+  //     setRating(0);
+  //     setComment("");
+  //     dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+  //   }
+  //   dispatch(listProductDetails(match.params.id));
+  // }, [dispatch, match, successProductReview]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -166,10 +160,9 @@ const NewsDetailScreen = ({ history, match }) => {
               </Link>
             </li>
             <li class="breadcrumb-item">
-              <Link to={"/cate/"+slugCate}>
-              <a>{nameCate}</a>
+              <Link to={"/cate/" + slugCate}>
+                <a>{nameCate}</a>
               </Link>
-             
             </li>
             {/* <li class="breadcrumb-item active">News details</li> */}
           </ul>
@@ -257,9 +250,12 @@ const NewsDetailScreen = ({ history, match }) => {
                     </a>
                   </div>
                 </div>
-                 {/* tổng bản ghi trong các chuyên mục */}
-                 <CountNewsCate data={count} title={"Các chuyên mục khác"}></CountNewsCate>
-            
+                {/* tổng bản ghi trong các chuyên mục */}
+                <CountNewsCate
+                  data={count}
+                  title={"Các chuyên mục khác"}
+                  currentCategory={nameCate}
+                ></CountNewsCate>
 
                 <div class="sidebar-widget">
                   <div class="image">
