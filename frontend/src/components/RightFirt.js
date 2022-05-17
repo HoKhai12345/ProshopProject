@@ -13,7 +13,7 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const RightFirt = ({ data , title}) => {
+const RightFirt = ({ data, title }) => {
   const dispatch = useDispatch();
   const settings = {
     dots: true,
@@ -22,30 +22,28 @@ const RightFirt = ({ data , title}) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    ltr: false
+    ltr: false,
   };
   return (
     <>
-    <div class="sidebar-widget">
-                  <h2 class="sw-title">{title}</h2>
-                  <div class="news-list">
-                    {
-                        data && data.map((value)=>(
-                     <div class="nl-item">
-                      <div class="nl-img">
-                        <img  src={"http://evideo.vn/cms/" + value.thumb} />
-                      </div>
-                      <div class="nl-title">
-                      <Link to={"/"+value.slugs+".html"}>
-                        <a>{trimString(value.title, 40)}</a>
-                        </Link>
-                      </div>
-                    </div>
-                        ))
-                    }
-            
-                  </div>
+      <div className="sidebar-widget">
+        <h2 className="sw-title">{title}</h2>
+        <div className="news-list">
+          {data &&
+            data.map((value) => (
+              <div className="nl-item">
+                <div className="nl-img">
+                  <img src={"http://evideo.vn/cms/" + value.thumb} />
                 </div>
+                <div className="nl-title">
+                  <Link to={"/" + value.slugs + ".html"}>
+                    <a>{trimString(value.title, 40)}</a>
+                  </Link>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
     </>
   );
 };

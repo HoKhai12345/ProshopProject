@@ -17,13 +17,11 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const SliderNews = ({ data , title , slugCate }) => {
+const SliderNews = ({ data, title, slugCate }) => {
   const dispatch = useDispatch();
 
-
-
-   // dispatch giá trị cho bản tin giao thông
-   useEffect(() => {
+  // dispatch giá trị cho bản tin giao thông
+  useEffect(() => {
     dispatch(listNewsTraffic("", 4, 0));
   }, [dispatch]);
   // dispatch giá trị cho bản tin star
@@ -45,30 +43,28 @@ const SliderNews = ({ data , title , slugCate }) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    ltr: false
+    ltr: false,
   };
   return (
     <>
-      <div class="col-md-6">
+      <div className="col-md-6">
         <h2>
-        <Link to={"/cate/"+slugCate}>
-          {title}
-          </Link>
+          <Link to={"/cate/" + slugCate}>{title}</Link>
         </h2>
-        <div class="row cn-slider2">
+        <div className="row cn-slider2">
           <Slider {...settings}>
             {data &&
               data.map((value) => {
                 return (
-                  <div class="col-md-12" key={value.id}>
-                    <div class="cn-img">
+                  <div className="col-md-12" key={value.id}>
+                    <div className="cn-img">
                       <img
                         style={{ height: 142 }}
                         src={"http://evideo.vn/cms/" + value.thumb}
                       />
-                      <div class="cn-title">
-                      <Link to={"/"+value.slugs+".html" }>
-                        <a>{trimString(value.title, 40)}</a>
+                      <div className="cn-title">
+                        <Link to={"/" + value.slugs + ".html"}>
+                          <a>{trimString(value.title, 40)}</a>
                         </Link>
                       </div>
                     </div>

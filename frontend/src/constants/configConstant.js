@@ -7,7 +7,7 @@ export const CATEGORYIDCONFIG = [
   {
     id: 37,
     slug: "Giao-thong",
-    categoryName: "Giao Thông",
+    categoryName: "Giao thông",
   },
   {
     id: 44,

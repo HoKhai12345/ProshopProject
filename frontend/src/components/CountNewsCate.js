@@ -33,9 +33,9 @@ const CountNewsCate = ({ data, title, currentCategory }) => {
   };
   return (
     <>
-      <div class="sidebar-widget">
-        <h2 class="sw-title">{title}</h2>
-        <div class="category">
+      <div className="sidebar-widget">
+        <h2 className="sw-title">{title}</h2>
+        <div className="category">
           <ul>
             {data &&
               data.map((value) => {

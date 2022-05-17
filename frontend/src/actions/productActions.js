@@ -56,7 +56,6 @@ export const listProducts =
       const { data } = await axios.get(
         `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
       );
-      console.log("data", data);
 
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
@@ -83,7 +82,6 @@ export const listNewsSocerSlide =
       const { data } = await axios.get(
         `/api/news/36?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("data", data);
 
       dispatch({
         type: POST_LIST_SUCCESS,
@@ -110,8 +108,6 @@ export const listNewsSocerRight =
       const { data } = await axios.get(
         `/api/news/36?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("data", data);
-
       dispatch({
         type: "POST_LIST_SUCCESS2",
         payload: data,
@@ -137,7 +133,6 @@ export const listNewsTraffic =
       const { data } = await axios.get(
         `/api/news/37?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataTraffic", data);
 
       dispatch({
         type: "TRAFFIC_LIST_SUCCESS",
@@ -164,8 +159,6 @@ export const listNewsStar =
       const { data } = await axios.get(
         `/api/news/28?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataSTAR", data);
-
       dispatch({
         type: "STAR_LIST_SUCCESS",
         payload: data,
@@ -191,8 +184,6 @@ export const listNewsCooking =
       const { data } = await axios.get(
         `/api/news/41?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataCOOKING", data);
-
       dispatch({
         type: "COOKING_LIST_SUCCESS",
         payload: data,
@@ -218,8 +209,6 @@ export const listNewsFashion =
       const { data } = await axios.get(
         `/api/news/42?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataFashion", data);
-
       dispatch({
         type: "FASHION_LIST_SUCCESS",
         payload: data,
@@ -245,8 +234,6 @@ export const listNewsSocialNetwork =
       const { data } = await axios.get(
         `/api/news/25?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataSocial", data);
-
       dispatch({
         type: "SOCIAL_LIST_SUCCESS",
         payload: data,
@@ -272,8 +259,6 @@ export const listNewsFunny =
       const { data } = await axios.get(
         `/api/news/27?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataFunny", data);
-
       dispatch({
         type: "FUNNY_LIST_SUCCESS",
         payload: data,
@@ -298,8 +283,6 @@ export const listNewsBeautify =
       const { data } = await axios.get(
         `/api/news/40?keyword=${keyword}&limit=${limit}&offset=${offset}`
       );
-      console.log("dataBeautify", data);
-
       dispatch({
         type: "BEAUTIFY_LIST_SUCCESS",
         payload: data,
@@ -405,7 +388,6 @@ export const listNewsViews = async (
 
 // lấy bài viết chi tiết qua slugs
 export const newsBySlugs = async (slugs, result) => {
-  console.log("SLUGS", slugs);
   const { data } = await axios.get(`/api/news/newsDetail?slug=${slugs}`);
   return result(null, data);
 };
@@ -420,7 +402,6 @@ export const listNewsByCategory =
       const { data } = await axios.get(
         `/api/news/listNews/${slugsCategory}?limit=${limit}&offset=${offset}`
       );
-      console.log("dataaaaaaaaaaaaa", data);
 
       dispatch({
         type: "NEWS_BY_CATE_SUCCESS",
@@ -444,9 +425,6 @@ export const listNewsByCate = async (
   offset = "",
   result
 ) => {
-  console.log(
-    `/api/news/listNews/${slugsCategory}&limit=${limit}&offset=${offset}`
-  );
   const { data } = await axios.get(
     `/api/news/listNews/${slugsCategory}?limit=${limit}&offset=${offset}`
   );
@@ -454,19 +432,11 @@ export const listNewsByCate = async (
 };
 
 // lấy bài viết search nhưng ko dùng redux
-export const listNewsSearch = async (
-  keyword = "",
-  limit = "",
-  offset = "",
-  result
-) => {
-  console.log(
-    `/api/news/search?keyword=${keyword}&limit=${limit}&offset=${offset}`
-  );
+export const listNewsSearch = async (keyword = "", limit = "", offset = "") => {
   const { data } = await axios.get(
     `/api/news/search?keyword=${keyword}&limit=${limit}&offset=${offset}`
   );
-  return result(null, data);
+  return data;
 };
 
 export const listNewsByCate2 = async (
@@ -497,6 +467,20 @@ export const countCatePost = () => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+// set trạng thái để disable ô inputSearch
+export const setInputSearch = (checkInput) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "CHECK_INPUT_SUCCESS",
+      payload: checkInput,
+    });
+  } catch (error) {
+    dispatch({
+      type: "CHECH_INPUT_FAIL",
     });
   }
 };

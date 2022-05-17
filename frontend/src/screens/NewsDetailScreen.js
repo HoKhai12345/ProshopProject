@@ -31,7 +31,9 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import { CATEGORYIDCONFIG } from "../constants/configConstant";
 import Traffic from "../components/Traffic";
-
+let trimString = function (string, length) {
+  return string.length > length ? string.substring(0, length) + "..." : string;
+};
 const NewsDetailScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
@@ -73,23 +75,18 @@ const NewsDetailScreen = ({ history, match }) => {
   }
   useEffect(() => {
     newsBySlugs(slug, (err, data) => {
-      console.log("DATA", data);
       if (data.data.length > 0) {
         setNewsDetail(data.data[0]);
         setRelatedNews(data.dataRelated);
         setNewCategoryId(data.data[0].categoryId);
         setDataInThisCategory(data.dataInThisCategory);
-        console.log("data.data[0].categoryId", data.data[0].categoryId);
         CATEGORYIDCONFIG.map((value) => {
-          console.log("newCategoryId", data.data[0].categoryId);
           if (value.id == data.data[0].categoryId) {
             setNameCate(value.categoryName);
             setSlugCate(value.slug);
-            console.log("NEWSCATE", nameCate);
           }
         });
       } else {
-        console.log("KO CO DATA");
         history.push("/404not-fount");
       }
     });
@@ -100,83 +97,40 @@ const NewsDetailScreen = ({ history, match }) => {
   const [comment, setComment] = useState("");
 
   const productDetails = useSelector((state) => state.productDetails);
-  console.log("productDetails", productDetails);
   const { loading, error, product } = productDetails;
-  console.log("product", product);
-
-  const userLogin = useSelector((state) => state.userLogin);
-
-  const { userInfo } = userLogin;
-
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const { success: successProductReview, error: errorProductReview } =
-    productReviewCreate;
-
-  // useEffect(() => {
-  //   if (successProductReview) {
-  //     alert("Review Submitted!");
-  //     setRating(0);
-  //     setComment("");
-  //     dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-  //   }
-  //   dispatch(listProductDetails(match.params.id));
-  // }, [dispatch, match, successProductReview]);
-
-  const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(match.params.id, {
-        rating,
-        comment,
-      })
-    );
-  };
-
-  const countStock = (countInStock) => {
-    console.log("countInStock", countInStock);
-    let html = [];
-    for (var i = 1; i <= countInStock; i++) {
-      html.push(
-        <option key={i} value={i}>
-          {i}
-        </option>
-      );
-    }
-    return html;
-  };
-
   return (
     <>
-      <div class="breadcrumb-wrap">
-        <div class="container">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <Link to={`/`}>
-                <a href="/">Trang chủ</a>
+      <div className="breadcrumb-wrap">
+        <div className="container">
+          <ul className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to={``}>
+                <a>Trang chủ</a>
               </Link>
             </li>
-            <li class="breadcrumb-item">
+            <li className="breadcrumb-item">
               <Link to={"/cate/" + slugCate}>
                 <a>{nameCate}</a>
               </Link>
             </li>
-            {/* <li class="breadcrumb-item active">News details</li> */}
+            <li className="breadcrumb-item tooltit">
+              {console.log("newsDetail.title", newsDetail.title)}
+              <a>{newsDetail.title && trimString(newsDetail.title, 40)}</a>
+            </li>
+            <span class="tooltiptext">{newsDetail.title}</span>
+            {/* <li className="breadcrumb-item active">News details</li> */}
           </ul>
         </div>
       </div>
       {/* <!-- Breadcrumb End -->
         
         <!-- Single News Start--> */}
-      <div class="single-news">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="sn-container">
-                <div class="sn-img">
+      <div className="single-news">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="sn-container">
+                <div className="sn-img">
                   <img
                     src={
                       newsDetail.photo_data != undefined
@@ -208,9 +162,8 @@ const NewsDetailScreen = ({ history, match }) => {
                   }}
                 />
               </div>
-              <div class="sn-relateds">
+              <div className="sn-relateds">
                 {/* <h2>Bài viết liên quan</h2> */}
-                {console.log("relatedNews", relatedNews)}
 
                 <RelatedNews
                   related={relatedNews}
@@ -219,22 +172,22 @@ const NewsDetailScreen = ({ history, match }) => {
               </div>
             </div>
 
-            <div class="col-lg-4">
-              <div class="sidebar">
+            <div className="col-lg-4">
+              <div className="sidebar">
                 <RightFirt
                   data={dataInThisCategory}
                   title={"Cùng chuyên mục"}
                 ></RightFirt>
 
-                <div class="sidebar-widget">
-                  <div class="image">
+                <div className="sidebar-widget">
+                  <div className="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
-                <div class="sidebar-widget">
-                  <div class="tab-news">
+                <div className="sidebar-widget">
+                  <div className="tab-news">
                     <RightManyPage
                       economy={newsEconomy}
                       family={newsFamily}
@@ -243,10 +196,10 @@ const NewsDetailScreen = ({ history, match }) => {
                   </div>
                 </div>
 
-                <div class="sidebar-widget">
-                  <div class="image">
+                <div className="sidebar-widget">
+                  <div className="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
@@ -257,17 +210,17 @@ const NewsDetailScreen = ({ history, match }) => {
                   currentCategory={nameCate}
                 ></CountNewsCate>
 
-                <div class="sidebar-widget">
-                  <div class="image">
+                <div className="sidebar-widget">
+                  <div className="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
 
-                {/* <div class="sidebar-widget">
-                  <h2 class="sw-title">Tags Cloud</h2>
-                  <div class="tags">
+                {/* <div className="sidebar-widget">
+                  <h2 className="sw-title">Tags Cloud</h2>
+                  <div className="tags">
                     <a href="">National</a>
                     <a href="">International</a>
                     <a href="">Economics</a>

@@ -13,8 +13,7 @@ let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
 
-const RelatedNews = ({ related , title}) => {
-    console.log("related",related);
+const RelatedNews = ({ related, title }) => {
   const dispatch = useDispatch();
   const settings = {
     dots: true,
@@ -23,40 +22,38 @@ const RelatedNews = ({ related , title}) => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    ltr: false
+    ltr: false,
   };
   return (
     <>
-            <div class="cat-news">
-
-      <div class="col-md-12">
-        <h2>
-        {title}
-        </h2>
-        <div class="row cn-slider2">
-          <Slider {...settings}>
-            {related && related != {} &&
-              related.map((value) => {
-                return (
-                  <div class="col-md-12" key={value.id}>
-                    <div class="cn-img">
-                      <img
-                        style={{ height: 142 }}
-                        src={"http://evideo.vn/cms/" + value.thumb}
-                      />
-                      <div class="cn-title">
-                      <Link to={"/"+value.slugs+".html"}>
-                        <a>{trimString(value.title, 40)}</a>
-                        </Link>
+      <div className="cat-news">
+        <div className="col-md-12">
+          <h2>{title}</h2>
+          <div className="row cn-slider2">
+            <Slider {...settings}>
+              {related &&
+                related != {} &&
+                related.map((value) => {
+                  return (
+                    <div className="col-md-12" key={value.id}>
+                      <div className="cn-img">
+                        <img
+                          style={{ height: 142 }}
+                          src={"http://evideo.vn/cms/" + value.thumb}
+                        />
+                        <div className="cn-title">
+                          <Link to={"/" + value.slugs + ".html"}>
+                            <a>{trimString(value.title, 40)}</a>
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-          </Slider>
-</div>
-</div>
-</div>
+                  );
+                })}
+            </Slider>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

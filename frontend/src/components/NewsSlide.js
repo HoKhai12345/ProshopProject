@@ -19,16 +19,16 @@ const NewsSlide = ({ news }) => {
 
   return (
     <>
-      <div class="col-md-6 tnLeft">
-        <div class="row tn-slider">
+      <div className="col-md-6 tnLeft">
+        <div className="row tn-slider">
           {news.map((news) => {
             return (
-              <div class="col-md-12">
-                <div class="tn-img">
+              <div className="col-md-12">
+                <div className="tn-img">
                   <img src={"http://evideo.vn/cms/" + news.thumb} />
-                  <div class="tn-title">
-                  <Link to={"/"+news.slugs+".html"}>
-                    <a>{news.title}</a>
+                  <div className="tn-title">
+                    <Link to={"/" + news.slugs + ".html"}>
+                      <a>{news.title}</a>
                     </Link>
                   </div>
                 </div>
@@ -37,8 +37,8 @@ const NewsSlide = ({ news }) => {
           })}
         </div>
       </div>
-      <div class="col-md-6 tn-right">
-        <div class="row">
+      <div className="col-md-6 tn-right">
+        <div className="row">
           <NewsRightSocker newsRight={newsSockerRight}></NewsRightSocker>
         </div>
       </div>

@@ -14,8 +14,6 @@ const PaginateCustom = ({
 }) => {
   const onChangePrev = () => {
     if (page > 1) {
-      console.log("PAGE2", page);
-
       setPage(page - 1);
     }
   };
@@ -43,7 +41,9 @@ const PaginateCustom = ({
     if (page != pages) {
       array.push(page + 1);
       if (page != pages - 1) {
-        array.push(page + 2);
+        if (pages >= 3) {
+          array.push(page + 2);
+        }
       }
     }
     // array.push(page+1);
@@ -54,7 +54,9 @@ const PaginateCustom = ({
 
     array.push(page);
     array.push(page + 1);
-    array.push(page + 2);
+    if (pages >= 3) {
+      array.push(page + 2);
+    }
   } else {
     // console.log("PAGE3",page);
     // array.slice(page);

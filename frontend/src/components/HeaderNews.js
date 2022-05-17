@@ -1,115 +1,175 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
-import SearchBox from './SearchBox'
-import { logout } from '../actions/userActions'
+import React from "react";
+import { Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import SearchBox from "./SearchBox";
+import { logout } from "../actions/userActions";
 
 const Header = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const logoutHandler = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
+  //   console.log("window.location.href", window.location.href);
   return (
     <header>
-          {/* <!-- Top Bar Start --> */}
-        <div class="top-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tb-contact">
-                            <p><i class="fas fa-envelope"></i>info@mail.com</p>
-                            <p><i class="fas fa-phone-alt"></i>+012 345 6789</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tb-menu">
-                            <a href="">About</a>
-                            <a href="">Privacy</a>
-                            <a href="">Terms</a>
-                            <a href="">Contact</a>
-                        </div>
-                    </div>
-                </div>
+      <div
+        className="fb-share-button"
+        data-href={window.location.href}
+        data-layout="button_count"
+      ></div>
+      {/* <!-- Top Bar Start --> */}
+      <div className="top-bar">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="tb-contact">
+                <p>
+                  <i className="fas fa-envelope"></i>info@mail.com
+                </p>
+                <p>
+                  <i className="fas fa-phone-alt"></i>+012 345 6789
+                </p>
+              </div>
             </div>
+            <div className="col-md-6">
+              <div className="tb-menu">
+                <a href="">About</a>
+                <a href="">Privacy</a>
+                <a href="">Terms</a>
+                <a href="">Contact</a>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* <!-- Top Bar Start -->
+      </div>
+      {/* <!-- Top Bar Start -->
         
         <!-- Brand Start --> */}
-        <div class="brand">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4">
-                        <div class="b-logo">
-                            <a href="index.html">
-                                <img src="/images/logo.png" alt="Logo"/>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-4">
-                        <div class="b-ads">
-                            <a href="https://htmlcodex.com">
-                                <img src="/images/ads-1.jpg" alt="Ads"/>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4">
-                        <div class="b-search">
-                            {/* <input type="text" placeholder="Search"/>
-                            <button><i class="fa fa-search"></i></button> */}
-            <Route render={({ history }) => <SearchBox history={history}  /> } />
-            {/* {console.log("history",history)} */}
-                        </div>
-                    </div>
-                </div>
+      <div className="brand">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-3 col-md-4">
+              <div className="b-logo">
+                <a href="index.html">
+                  <img src="/images/logo.png" alt="Logo" />
+                </a>
+              </div>
             </div>
+            <div className="col-lg-6 col-md-4">
+              <div className="b-ads">
+                <a href="https://htmlcodex.com">
+                  <img src="/images/ads-1.jpg" alt="Ads" />
+                </a>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-4">
+              <div className="b-search">
+                {/* <input type="text" placeholder="Search"/>
+                            <button><i className="fa fa-search"></i></button> */}
+                <Route
+                  render={({ history }) => <SearchBox history={history} />}
+                />
+                {/* {console.log("history",history)} */}
+              </div>
+            </div>
+          </div>
         </div>
-        {/* <!-- Brand End -->
+      </div>
+      {/* <!-- Brand End -->
 
         <!-- Nav Bar Start --> */}
-        <div class="nav-bar">
-            <div class="container">
-                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <a href="#" class="navbar-brand">MENU</a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+      <div className="nav-bar">
+        <div className="container">
+          <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#" className="navbar-brand">
+              MENU
+            </a>
+            <button
+              type="button"
+              className="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                        <LinkContainer to='/'>
-                <Nav.Link>
-                   Home
-                </Nav.Link>
-              </LinkContainer>                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Sub Item 1</a>
-                                    <a href="#" class="dropdown-item">Sub Item 2</a>
-                                </div>
-                            </div>
-                            <a href="single-page.html" class="nav-item nav-link">Single Page</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
-                        </div>
-                        <div class="social ml-auto">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </nav>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div className="navbar-nav mr-auto">
+                <LinkContainer to="/">
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>{" "}
+                <div className="nav-item dropdown">
+                  <a
+                    href="#"
+                    className="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                  >
+                    Dropdown
+                  </a>
+                  <div className="dropdown-menu">
+                    <a href="#" className="dropdown-item">
+                      Sub Item 1
+                    </a>
+                    <a href="#" className="dropdown-item">
+                      Sub Item 2
+                    </a>
+                  </div>
+                </div>
+                <a href="single-page.html" className="nav-item nav-link">
+                  Single Page
+                </a>
+                <a href="contact.html" className="nav-item nav-link">
+                  Contact Us
+                </a>
+              </div>
+              <div className="social ml-auto">
+                <a href="">
+                  <i className="fab fa-twitter"></i>
+                </a>
+
+                <a href="">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
+                <a href="">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="">
+                  <i className="fab fa-youtube"></i>
+                </a>
+              </div>
+              {/* <div
+                className="fb-share-button"
+                data-href={window.location.href}
+                data-layout="button"
+                data-size="large"
+              >
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                  className="fb-xfbml-parse-ignore"
+                >
+                  Chia sẻ
+                </a>
+              </div> */}
             </div>
+          </nav>
         </div>
-        {/* <!-- Nav Bar End --> */}
+      </div>
+      {/* <!-- Nav Bar End --> */}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

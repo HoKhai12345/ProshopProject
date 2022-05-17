@@ -16,85 +16,87 @@ let trimString = function (string, length) {
 };
 
 const RightManyPage = ({ economy, family, travel }) => {
-  console.log("economy",economy);
   const dispatch = useDispatch();
-        //dispatch giá trị cho bản tin gia đình 
-        useEffect(() => {
-          dispatch(listNewsFamily("", 3, 0));
-        }, [dispatch]);
-          //dispatch giá trị cho bản tin du lịch
-      useEffect(() => {
-        dispatch(listNewsTravel("", 3, 0));
-      }, [dispatch]);
-        //dispatch giá trị cho bản tin kinh tế 
-        useEffect(() => {
-          dispatch(listNewsEconomy("", 3, 0));
-        }, [dispatch]);
+  //dispatch giá trị cho bản tin gia đình
+  useEffect(() => {
+    dispatch(listNewsFamily("", 3, 0));
+  }, [dispatch]);
+  //dispatch giá trị cho bản tin du lịch
+  useEffect(() => {
+    dispatch(listNewsTravel("", 3, 0));
+  }, [dispatch]);
+  //dispatch giá trị cho bản tin kinh tế
+  useEffect(() => {
+    dispatch(listNewsEconomy("", 3, 0));
+  }, [dispatch]);
   return (
     <>
-      {/* <div class="col-md-6"> */}
-        <ul class="nav nav-pills nav-justified">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#economy">
-              Kinh tế
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#family">
+      {/* <div className="col-md-6"> */}
+      <ul className="nav nav-pills nav-justified">
+        <li className="nav-item">
+          <a className="nav-link active" data-toggle="pill" href="#economy">
+            Kinh tế
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" data-toggle="pill" href="#family">
             Fitness
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#travel">
-              Thời tiết
-            </a>
-          </li>
-        </ul>
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" data-toggle="pill" href="#travel">
+            Thời tiết
+          </a>
+        </li>
+      </ul>
 
-        <div class="tab-content" id="myTabContent">
-          <div id="economy" class="container tab-pane active">
-            {economy &&
-              economy.map((value) => (
-                <div class="tn-news">
-                  <div class="tn-img">
-                    <img src={"http://evideo.vn/cms/" + value.thumb} />
-                  </div>
-                  <div class="tn-title">
-                  <Link to={"/"+value.slugs+".html"}>
-                        <a>{trimString(value.title, 40)}</a>
-                        </Link>                  </div>
+      <div className="tab-content" id="myTabContent">
+        <div id="economy" className="container tab-pane active">
+          {economy &&
+            economy.map((value) => (
+              <div className="tn-news">
+                <div className="tn-img">
+                  <img src={"http://evideo.vn/cms/" + value.thumb} />
                 </div>
-              ))}
-          </div>
-          <div id="family" class="container tab-pane fade">
-          {family &&
-              family.map((value) => (
-                <div class="tn-news">
-                  <div class="tn-img">
-                    <img src={"http://evideo.vn/cms/" + value.thumb} />
-                  </div>
-                  <div class="tn-title">
-                  <Link to={"/"+value.slugs+".html"}>
-                        <a>{trimString(value.title, 40)}</a>
-                        </Link>                  </div>
+                <div className="tn-title">
+                  <Link to={"/" + value.slugs + ".html"}>
+                    <a>{trimString(value.title, 40)}</a>
+                  </Link>{" "}
                 </div>
-              ))}
-          </div>
-          <div id="travel" class="container tab-pane fade">
-          {travel &&
-              travel.map((value) => (
-                <div class="tn-news">
-                  <div class="tn-img">
-                    <img src={"http://evideo.vn/cms/" + value.thumb} />
-                  </div>
-                  <div class="tn-title">
-                  <Link to={"/"+value.slugs+".html"}>
-                        <a>{trimString(value.title, 40)}</a>
-                        </Link>                  </div>
-                </div>
-              ))}
-          </div>
+              </div>
+            ))}
         </div>
+        <div id="family" className="container tab-pane fade">
+          {family &&
+            family.map((value) => (
+              <div className="tn-news">
+                <div className="tn-img">
+                  <img src={"http://evideo.vn/cms/" + value.thumb} />
+                </div>
+                <div className="tn-title">
+                  <Link to={"/" + value.slugs + ".html"}>
+                    <a>{trimString(value.title, 40)}</a>
+                  </Link>{" "}
+                </div>
+              </div>
+            ))}
+        </div>
+        <div id="travel" className="container tab-pane fade">
+          {travel &&
+            travel.map((value) => (
+              <div className="tn-news">
+                <div className="tn-img">
+                  <img src={"http://evideo.vn/cms/" + value.thumb} />
+                </div>
+                <div className="tn-title">
+                  <Link to={"/" + value.slugs + ".html"}>
+                    <a>{trimString(value.title, 40)}</a>
+                  </Link>{" "}
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
       {/* </div> */}
     </>
   );

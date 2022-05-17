@@ -10,14 +10,15 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
+import moment from "moment";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
 import Meta from "../components/Meta";
 import RightFirt from "../components/RightFirt";
 import RightManyPage from "../components/RightManyPage";
 import CountNewsCate from "../components/CountNewsCate";
 import PaginateCustom from "../components/PaginateCustom";
+import Loader from "../components/Loader";
 
 import {
   listProductDetails,
@@ -26,6 +27,7 @@ import {
   listNewsByCate,
   listNewsByCate2,
   listNewsSearch,
+  setInputSearch,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
@@ -40,7 +42,7 @@ const SearchNewsScreen = ({ history, match }) => {
   const [getCateName, setCateName] = useState("");
   const [getPages, setPages] = useState(1);
   const [getPage, setPage] = useState(1);
-
+  const [getLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const newsFamilyPage = useSelector((state) => state.listNewsFamily);
@@ -50,6 +52,9 @@ const SearchNewsScreen = ({ history, match }) => {
   const newsTravelPage = useSelector((state) => state.listNewsTravel);
   // lấy tổng bản ghi theo từng chuyên mục trong store
   const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
+  // lấy trạng thái ô input search trong store
+  const setInputSearch2 = useSelector((state) => state.setInputSearch);
+  // console.log("setInputSearch", setInputSearch2);
   const { count } = countNewsPostCate;
 
   const { newsFamily } = newsFamilyPage;
@@ -59,26 +64,38 @@ const SearchNewsScreen = ({ history, match }) => {
   const keyword = match.params.keyword;
 
   useEffect(() => {
-    listNewsSearch(keyword, getLimit, getOffset, (err, data) => {
-      setListNews(data.data);
-      setPages(Math.ceil(data.countRecord / 10));
-    });
+    try {
+      (async () => {
+        setListNews([]);
+        setLoading(true);
+        dispatch(setInputSearch(true));
+        const data = await listNewsSearch(keyword, getLimit, getOffset);
+        setListNews(data.data);
+        setLoading(false);
+        dispatch(setInputSearch(false));
+        setPages(Math.ceil(data.countRecord / 10));
+      })();
+    } catch (error) {
+      console.log("errorUseEffect", error);
+    }
   }, [keyword]);
 
   // const cbPage = async (data) => {
   //   setPage(data);
   // };
   const reloadData = async () => {
+    setListNews([]);
+    setLoading(true);
+
     const dataAfterCbPage = await listNewsSearch(
       keyword,
       10,
       10 * (getPage - 1)
     );
-    console.log("dataAfterCbPage", dataAfterCbPage);
-
+    // console.log("dataAfterCbPage", dataAfterCbPage);
     setListNews(dataAfterCbPage?.data);
+    setLoading(false);
   };
-
   useEffect(() => {
     reloadData();
   }, [getPage]);
@@ -95,16 +112,21 @@ const SearchNewsScreen = ({ history, match }) => {
                   </Link>
                 </li>
                 <li class="breadcrumb-item">
-                  <Link>
-                    <a>{keyword}</a>
-                  </Link>
+                  Từ khóa tìm kiếm : <a>{trimString(keyword, 40)}</a>
                 </li>
                 {/* <li class="breadcrumb-item active">News details</li> */}
               </ul>
             </div>
-            {/* 
+            {listNews && listNews.length != 0 && (
+              <PaginateCustom
+                pages={getPages}
+                page={getPage}
+                setPage={setPage}
+              ></PaginateCustom>
+            )}
             <div class="tab-content" id="myTabContent">
               <div id="economy" class="container tab-pane active">
+                {getLoading && <Loader></Loader>}
                 {listNews &&
                   listNews.map((value) => (
                     <div class="tn-news">
@@ -113,19 +135,29 @@ const SearchNewsScreen = ({ history, match }) => {
                       </div>
                       <div class="tn-title">
                         <Link to={"/" + value.slugs + ".html"}>
-                          <a>{trimString(value.title, 40)}</a>
-                        </Link>{" "}
+                          <a className="titleNews">
+                            {trimString(value.title, 40)}
+                          </a>
+                        </Link>
+                        <p>
+                          <i>{trimString(value.description, 100)}</i>
+                        </p>
+                        <lable>
+                          {moment(value.created_at).format("YYYY-MM-D ")}
+                        </lable>
                       </div>
                     </div>
                   ))}
+                {!listNews && "Không có bài viết với từ khóa : " + keyword}
               </div>
-            </div> */}
-
-            <PaginateCustom
-              pages={getPages}
-              page={getPage}
-              setPage={setPage}
-            ></PaginateCustom>
+            </div>
+            {listNews && listNews.length != 0 && (
+              <PaginateCustom
+                pages={getPages}
+                page={getPage}
+                setPage={setPage}
+              ></PaginateCustom>
+            )}
           </div>
           <div class="col-4">
             <div class="single-news">
@@ -133,7 +165,7 @@ const SearchNewsScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
@@ -150,7 +182,7 @@ const SearchNewsScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
@@ -164,7 +196,7 @@ const SearchNewsScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>

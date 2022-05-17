@@ -10,6 +10,7 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
+import moment from "moment";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -56,8 +57,6 @@ const CategoryScreen = ({ history, match }) => {
   const { newsEconomy } = newsEconomyPage;
 
   const categorySlug = match.params.categorySlug;
-  console.log("categorySlug", categorySlug);
-
   useEffect(() => {
     setCateSlug(categorySlug);
     listNewsByCate(categorySlug, getLimit, getOffset, (err, data) => {
@@ -77,7 +76,7 @@ const CategoryScreen = ({ history, match }) => {
       10,
       10 * (getPage - 1)
     );
-    console.log("dataAfterCbPage", dataAfterCbPage);
+    // console.log("dataAfterCbPage", dataAfterCbPage);
 
     setListNews(dataAfterCbPage?.data);
   };
@@ -116,12 +115,17 @@ const CategoryScreen = ({ history, match }) => {
                           src={"http://evideo.vn/cms/" + value.thumb}
                           alt="HTML5 Icon"
                         />
-                        <h6>{"" + value.thumb}</h6>
                       </div>
                       <div class="tn-title">
                         <Link to={"/" + value.slugs + ".html"}>
-                          <a>{trimString(value.title, 40)}</a>
+                          <a class="titleNews">{trimString(value.title, 40)}</a>
                         </Link>{" "}
+                        <p>
+                          <i>{trimString(value.description, 100)}</i>
+                        </p>
+                        <lable>
+                          {moment(value.created_at).format("YYYY-MM-D ")}
+                        </lable>
                       </div>
                     </div>
                   ))}
@@ -140,7 +144,7 @@ const CategoryScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
@@ -157,7 +161,7 @@ const CategoryScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
@@ -171,7 +175,7 @@ const CategoryScreen = ({ history, match }) => {
                 <div class="sidebar-widget">
                   <div class="image">
                     <a href="https://htmlcodex.com">
-                      <img src="img/ads-2.jpg" alt="Image" />
+                      <img src="/images/ads-1.jpg" alt="Image" />
                     </a>
                   </div>
                 </div>
