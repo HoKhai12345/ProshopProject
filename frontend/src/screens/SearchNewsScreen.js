@@ -13,12 +13,12 @@ import {
 import moment from "moment";
 import Rating from "../components/Rating";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
 import Meta from "../components/Meta";
 import RightFirt from "../components/RightFirt";
 import RightManyPage from "../components/RightManyPage";
 import CountNewsCate from "../components/CountNewsCate";
 import PaginateCustom from "../components/PaginateCustom";
+import Loader from "../components/Loader";
 
 import {
   listProductDetails,
@@ -26,21 +26,23 @@ import {
   listProducts,
   listNewsByCate,
   listNewsByCate2,
+  listNewsSearch,
+  setInputSearch,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 let trimString = function (string, length) {
   return string.length > length ? string.substring(0, length) + "..." : string;
 };
-const CategoryScreen = ({ history, match }) => {
+const SearchNewsScreen = ({ history, match }) => {
   const [listNews, setListNews] = useState();
   const [getLimit, setLimit] = useState(10);
   const [getOffset, setOffset] = useState(0);
-  const [getCateSlug, setCateSlug] = useState("");
+  const [getSearch, setSearch] = useState("");
   const [getCateName, setCateName] = useState("");
   const [getPages, setPages] = useState(1);
   const [getPage, setPage] = useState(1);
-
+  const [getLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const newsFamilyPage = useSelector((state) => state.listNewsFamily);
@@ -50,37 +52,50 @@ const CategoryScreen = ({ history, match }) => {
   const newsTravelPage = useSelector((state) => state.listNewsTravel);
   // lấy tổng bản ghi theo từng chuyên mục trong store
   const countNewsPostCate = useSelector((state) => state.countNewsPostCate);
+  // lấy trạng thái ô input search trong store
+  const setInputSearch2 = useSelector((state) => state.setInputSearch);
+  // console.log("setInputSearch", setInputSearch2);
   const { count } = countNewsPostCate;
 
   const { newsFamily } = newsFamilyPage;
   const { newsTravel } = newsTravelPage;
   const { newsEconomy } = newsEconomyPage;
 
-  const categorySlug = match.params.categorySlug;
+  const keyword = match.params.keyword;
+
   useEffect(() => {
-    setCateSlug(categorySlug);
-    listNewsByCate(categorySlug, getLimit, getOffset, (err, data) => {
-      setListNews(data.data);
-      setCateName(data.data[0].nameCate);
-      setPages(Math.ceil(data.count[0].countData / 10));
-      setPage(1);
-    });
-  }, [categorySlug]);
+    try {
+      (async () => {
+        setListNews([]);
+        setLoading(true);
+        dispatch(setInputSearch(true));
+        const data = await listNewsSearch(keyword, getLimit, getOffset);
+        setListNews(data.data);
+        setLoading(false);
+        dispatch(setInputSearch(false));
+        setPages(Math.ceil(data.countRecord / 10));
+      })();
+    } catch (error) {
+      console.log("errorUseEffect", error);
+    }
+  }, [keyword]);
 
   // const cbPage = async (data) => {
   //   setPage(data);
   // };
   const reloadData = async () => {
-    const dataAfterCbPage = await listNewsByCate2(
-      categorySlug,
+    setListNews([]);
+    setLoading(true);
+
+    const dataAfterCbPage = await listNewsSearch(
+      keyword,
       10,
       10 * (getPage - 1)
     );
     // console.log("dataAfterCbPage", dataAfterCbPage);
-
     setListNews(dataAfterCbPage?.data);
+    setLoading(false);
   };
-
   useEffect(() => {
     reloadData();
   }, [getPage]);
@@ -97,29 +112,33 @@ const CategoryScreen = ({ history, match }) => {
                   </Link>
                 </li>
                 <li class="breadcrumb-item">
-                  <Link to={"/cate/" + getCateSlug}>
-                    <a>{getCateName}</a>
-                  </Link>
+                  Từ khóa tìm kiếm : <a>{trimString(keyword, 40)}</a>
                 </li>
                 {/* <li class="breadcrumb-item active">News details</li> */}
               </ul>
             </div>
-
+            {listNews && listNews.length != 0 && (
+              <PaginateCustom
+                pages={getPages}
+                page={getPage}
+                setPage={setPage}
+              ></PaginateCustom>
+            )}
             <div class="tab-content" id="myTabContent">
               <div id="economy" class="container tab-pane active">
+                {getLoading && <Loader></Loader>}
                 {listNews &&
                   listNews.map((value) => (
                     <div class="tn-news">
                       <div class="tn-img">
-                        <img
-                          src={"http://evideo.vn/cms/" + value.thumb}
-                          alt="HTML5 Icon"
-                        />
+                        <img src={"http://evideo.vn/cms/" + value.thumb} />
                       </div>
                       <div class="tn-title">
                         <Link to={"/" + value.slugs + ".html"}>
-                          <a class="titleNews">{trimString(value.title, 40)}</a>
-                        </Link>{" "}
+                          <a className="titleNews">
+                            {trimString(value.title, 40)}
+                          </a>
+                        </Link>
                         <p>
                           <i>{trimString(value.description, 100)}</i>
                         </p>
@@ -129,14 +148,16 @@ const CategoryScreen = ({ history, match }) => {
                       </div>
                     </div>
                   ))}
+                {!listNews && "Không có bài viết với từ khóa : " + keyword}
               </div>
             </div>
-            <PaginateCustom
-              pages={getPages}
-              page={getPage}
-              categorySlug={categorySlug}
-              setPage={setPage}
-            ></PaginateCustom>
+            {listNews && listNews.length != 0 && (
+              <PaginateCustom
+                pages={getPages}
+                page={getPage}
+                setPage={setPage}
+              ></PaginateCustom>
+            )}
           </div>
           <div class="col-4">
             <div class="single-news">
@@ -169,7 +190,7 @@ const CategoryScreen = ({ history, match }) => {
                 <CountNewsCate
                   data={count}
                   title={"Các chuyên mục khác"}
-                  currentCategory={getCateName}
+                  //   currentCategory={getCateName}
                 ></CountNewsCate>
 
                 <div class="sidebar-widget">
@@ -201,4 +222,4 @@ const CategoryScreen = ({ history, match }) => {
   );
 };
 
-export default CategoryScreen;
+export default SearchNewsScreen;

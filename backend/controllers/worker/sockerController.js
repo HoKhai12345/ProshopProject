@@ -19,7 +19,7 @@ const index = asyncHandler(async (req, res) => {
   const offset = req.query.offset ? req.query.offset : 0;
   const keyword = req.query.keyword ? req.query.keyword : "";
 
-     const data = await postModel.getListData(keyword, categoryId, limit, offset);
+  const data = await postModel.getListData(keyword, categoryId, limit, offset);
 
   res.json({
     err: 0,
@@ -28,6 +28,20 @@ const index = asyncHandler(async (req, res) => {
   });
 });
 
+const search = asyncHandler(async (req, res) => {
+  const limit = req.query.limit ? req.query.limit : 10;
+  const offset = req.query.offset ? req.query.offset : 0;
+  const keyword = req.query.keyword ? req.query.keyword : "";
+
+  const data = await postModel.getDataSearch(keyword, limit, offset);
+  const count = await postModel.getCountSearch(keyword, limit, offset);
+  res.json({
+    err: 0,
+    status: 1,
+    data: data,
+    countRecord: count[0].countData,
+  });
+});
 
 const countPostCate = asyncHandler(async (req, res) => {
   const data = await postModel.getCountPostCate();
@@ -38,36 +52,31 @@ const countPostCate = asyncHandler(async (req, res) => {
   });
 });
 
-
 const listNewsByCate = asyncHandler(async (req, res) => {
-  console.log("req.params",req.params.categorySlugs);
+  console.log("req.params", req.params.categorySlugs);
   const categorySlug = req.params.categorySlugs;
   const limit = req.query.limit ? req.query.limit : 10;
   const offset = req.query.offset ? req.query.offset : 0;
-  if(!categorySlug){
+  if (!categorySlug) {
     res.json({
       err: 1,
       msg: "Invalid params",
     });
-  }else{
-    const data = await postModel.getDataBySlug(categorySlug , limit , offset);
+  } else {
+    const data = await postModel.getDataBySlug(categorySlug, limit, offset);
     const count = await postModel.getCountDataBySlug(categorySlug);
     res.json({
       err: 0,
       status: 1,
       data: data,
-      count: count
+      count: count,
     });
   }
- 
 });
-
-
-
 
 const newsDetail = asyncHandler(async (req, res) => {
   const slug = req.query.slug;
-  console.log("slug",slug);
+  console.log("slug", slug);
 
   if (!slug) {
     res.json({ err: 1, msg: "thiếu tham số " });
@@ -76,27 +85,32 @@ const newsDetail = asyncHandler(async (req, res) => {
   // const offset = req.query.offset ? req.query.offset : 0;
   // const keyword = req.query.keyword ? req.query.keyword : "";
   const data = await postModel.getDataByUuId(slug);
- console.log("DAAAAAA",data);
- if(data.length>0){
-  const dataRelated = await postModel.getDataRelaredByslug(slug,data[0].categoryId);
-  const dataInThisCategory = await postModel.getDataInThisCateByslug(slug,data[0].categoryId);
-  res.json({
-    err: 0,
-    status: 1,
-    data: data,
-    dataRelated:dataRelated,
-    dataInThisCategory:dataInThisCategory
-  });
- }else{
-  res.json({
-    err: 0,
-    status: 1,
-    data: [],
-    dataRelated:[],
-    dataInThisCategory:[]
-  });
- }
-
+  console.log("DAAAAAA", data);
+  if (data.length > 0) {
+    const dataRelated = await postModel.getDataRelaredByslug(
+      slug,
+      data[0].categoryId
+    );
+    const dataInThisCategory = await postModel.getDataInThisCateByslug(
+      slug,
+      data[0].categoryId
+    );
+    res.json({
+      err: 0,
+      status: 1,
+      data: data,
+      dataRelated: dataRelated,
+      dataInThisCategory: dataInThisCategory,
+    });
+  } else {
+    res.json({
+      err: 0,
+      status: 1,
+      data: [],
+      dataRelated: [],
+      dataInThisCategory: [],
+    });
+  }
 });
 
 const notApi = asyncHandler(async (req, res) => {
@@ -105,4 +119,4 @@ const notApi = asyncHandler(async (req, res) => {
     msg: "Invalid params",
   });
 });
-export { index, notApi , newsDetail ,countPostCate,listNewsByCate};
+export { index, notApi, newsDetail, countPostCate, listNewsByCate, search };

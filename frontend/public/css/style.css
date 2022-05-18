@@ -295,6 +295,9 @@ button.btn:hover {
 .navbar-dark .navbar-nav .nav-link.active {
     border-bottom: 2px solid #000000;
     transition: none;
+    background: #d5d5d5;
+    color: black;
+    font-weight: bold
 }
 
 .nav-bar .dropdown-menu {
@@ -638,7 +641,7 @@ button.btn:hover {
 .tab-news .tn-title a {
     color: #000000;
     font-size: 18px;
-    font-weight: 400;
+    /* font-weight: 400; */
     transition: all .3s;
 }
 
@@ -1365,3 +1368,97 @@ button.btn:hover {
 
 
 /* css  404 not fount  */
+
+
+/**********************************/
+/********** Cate CSS ************/
+/**********************************/
+.activeCurrentCate{
+    background: radial-gradient(#e32411, transparent);
+}
+a.titleNews{
+    background: radial-gradient(#c0c9d8, transparent);
+    font-weight: bold;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  li.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  li.tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .wrapper{
+    max-width: 400px;
+    /* background: green; */
+    height: 40px;
+    text-align: right;
+}
+
+.marquee {
+    /* background: red; */
+    white-space: nowrap;
+    /* -webkit-animation: rightThenLeft 100s linear; */
+    -webkit-animation: changeColor 50s linear;
+    /* margin-right: 10000px; */
+    font-weight: bold;
+}
+
+@-webkit-keyframes rightThenLeft {
+    0%   {margin-right:100%;}
+    1%   {margin-right:10%;}
+    2%   {margin-right:20%;}
+    3%   {margin-right:100%;}
+    4%   {margin-right:100%;}
+    5%   {margin-right:100%;}
+    6%   {margin-right:100%;}
+    7%   {margin-right:100%;}
+    8%   {margin-right:100%;}
+    9%   {margin-right:100%;}
+    10%   {margin-right:100%;}
+    11%   {margin-right:100%;}
+    12%   {margin-right:100%;}
+    13%   {margin-right:100%;}
+    14%   {margin-right:100%;}
+    15%   {margin-right:100%;}
+    16%   {margin-right:100%;}
+    50%  {margin-right:0;}
+    100% {margin-right:100%;}
+}
+@-webkit-keyframes changeColor {
+    0%   {color:rgba(0, 0, 0, .9);}
+    5%   {color:rgba(201, 147, 147, 0.9);}
+    10%    {color:rgba(72, 177, 128, 0.9);}
+    15%   {color:rgba(87, 41, 131, 0.9);}
+    20%    {color:rgba(85, 6, 52, 0.9);}
+    25%    {color:rgba(241, 78, 13, 0.9);}
+    30%   {color:rgba(47, 125, 189, 0.9);}
+    35%    {color:rgba(114, 107, 182, 0.9);}
+    40%   {color:rgba(230, 9, 138, 0.9);}
+    45%   {color:rgba(11, 245, 206, 0.9);}
+    50%   {color:rgba(26, 108, 231, 0.9);}
+    55%   {color:rgba(236, 5, 5, 0.9);}
+    60%    {color:rgba(114, 53, 53, 0.9);}
+    65%    {color:rgba(32, 70, 139, 0.9);}
+    70%   {color:rgba(14, 1, 1, 0.9);}
+    75%    {color:rgba(247, 4, 174, 0.9);}
+    80%   {color:rgba(204, 248, 6, 0.9);}
+    85%   {color:rgba(0, 0, 0, .9);}
+    100%  {color:rgba(0, 0, 0, .9);}
+}
