@@ -24,7 +24,7 @@ const Header = () => {
         data-layout="button_count"
       ></div>
       {/* <!-- Top Bar Start --> */}
-      <div className="top-bar">
+      {/* <div className="top-bar">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -47,7 +47,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!-- Top Bar Start -->
         
         <!-- Brand Start --> */}
@@ -105,15 +105,15 @@ const Header = () => {
             >
               <div className="navbar-nav mr-auto">
                 <LinkContainer to="/">
-                  <Nav.Link>Home</Nav.Link>
+                  <Nav.Link>Trang chủ</Nav.Link>
                 </LinkContainer>{" "}
-                <div className="nav-item dropdown">
+                {/* <div className="nav-item dropdown">
                   <a
                     href="#"
                     className="nav-link dropdown-toggle"
                     data-toggle="dropdown"
                   >
-                    Dropdown
+                    Chuyên mục
                   </a>
                   <div className="dropdown-menu">
                     <a href="#" className="dropdown-item">
@@ -123,11 +123,11 @@ const Header = () => {
                       Sub Item 2
                     </a>
                   </div>
-                </div>
-                <a href="single-page.html" className="nav-item nav-link">
+                </div> */}
+                <a href="" className="nav-item nav-link">
                   Single Page
                 </a>
-                <a href="contact.html" className="nav-item nav-link">
+                <a href="" className="nav-item nav-link">
                   Contact Us
                 </a>
               </div>

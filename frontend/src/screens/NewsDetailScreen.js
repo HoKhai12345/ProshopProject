@@ -110,16 +110,24 @@ const NewsDetailScreen = ({ history, match }) => {
             </li>
             <li className="breadcrumb-item">
               <Link to={"/cate/" + slugCate}>
+                {console.log("nameCate", nameCate)}
                 <a>{nameCate}</a>
               </Link>
             </li>
-            <li className="breadcrumb-item tooltit">
+            <li className="breadcrumb-item ">
               {console.log("newsDetail.title", newsDetail.title)}
-              <a>{newsDetail.title && trimString(newsDetail.title, 40)}</a>
+
+              {/* <div class="wrapper"> */}
+
+              <a className="marquee">
+                {newsDetail.title && trimString(newsDetail.title, 40)}
+              </a>
+
+              {/* </div> */}
             </li>
-            <span class="tooltiptext">{newsDetail.title}</span>
             {/* <li className="breadcrumb-item active">News details</li> */}
           </ul>
+          {/* <span class="tooltiptext">{newsDetail.title}</span> */}
         </div>
       </div>
       {/* <!-- Breadcrumb End -->

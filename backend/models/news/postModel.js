@@ -28,7 +28,7 @@ Post.getDataSearch = async (keyword, limit = 10, offset = 0, result) => {
   const [rows, fields] = await dbConnectMysql
     .promise()
     .query(
-      "SELECT * FROM data_news_version_2_posts where  title LIKE  '%" +
+      "SELECT title , name , id , categoryId , created_at , thumb , photo , photo_data , slugs , description FROM data_news_version_2_posts where  title LIKE  '%" +
         keyword +
         "%'" +
         " ORDER BY id DESC" +
@@ -162,7 +162,7 @@ Post.getCountPostCate = async (result) => {
 
 Post.getDataBySlug = async (categorySlug, limit, offset, result) => {
   console.log(
-    "SELECT data_news_version_2_posts.*,data_news_version_2_category.NAME AS nameCate FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '" +
+    "SELECT data_news_version_2_posts.title , data_news_version_2_posts.name , data_news_version_2_posts.id , data_news_version_2_posts.description, data_news_version_2_posts.thumb , data_news_version_2_posts.photo ,  data_news_version_2_posts.slugs , data_news_version_2_posts.photo_data , data_news_version_2_posts.categoryId , data_news_version_2_posts.created_at ,data_news_version_2_category.NAME AS nameCate FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '" +
       categorySlug +
       "' ) ORDER BY id DESC LIMIT " +
       offset +
@@ -171,7 +171,7 @@ Post.getDataBySlug = async (categorySlug, limit, offset, result) => {
   );
   const [rows, fields] = await dbConnectMysql.promise().query(
     // "SELECT * , data_news_version_2_category.name as nameCate  from data_news_version_2_posts where categoryId IN (SELECT id from data_news_version_2_category INNER JOIN data_news_version_2_category where slugs = '"+categorySlug+"') limit "+offset+","+limit
-    "SELECT data_news_version_2_posts.*,data_news_version_2_category.NAME AS nameCate FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '" +
+    "SELECT data_news_version_2_posts.title , data_news_version_2_posts.name , data_news_version_2_posts.id , data_news_version_2_posts.description, data_news_version_2_posts.thumb , data_news_version_2_posts.photo , data_news_version_2_posts.slugs , data_news_version_2_posts.photo_data , data_news_version_2_posts.categoryId , data_news_version_2_posts.created_at ,data_news_version_2_category.NAME AS nameCate FROM data_news_version_2_posts LEFT JOIN data_news_version_2_category ON data_news_version_2_posts.categoryId = data_news_version_2_category.id WHERE categoryId IN ( SELECT id FROM data_news_version_2_category WHERE slugs = '" +
       categorySlug +
       "' ) ORDER BY id DESC LIMIT " +
       offset +
